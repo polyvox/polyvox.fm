@@ -23,3 +23,4 @@ a { text-transform: uppercase; color: #2196F3; text-decoration: none; font-famil
 
 .polyvox-font { font-family: Righteous, Impact, monospace; text-transform: lowercase; }
 .important { background-color: #FFE082; padding: 1em; margin: 0 auto; border-radius: 0 0 8px 8px; font-weight: 700; }
+.alert { background-color: #D50000; padding: 1em; margin: 0 auto; font-weight: 400; color: white; }
