@@ -1,0 +1,22 @@
+{
+  "name": "polyvox.fm",
+  "homepage": "http://polyvox.fm",
+  "authors": [
+    "Curtis Schlak <curtis@polyvox.fm>"
+  ],
+  "description": "The stuff that runs polyvox.",
+  "main": "",
+  "moduleType": [],
+  "license": "Copyright 2015 polyvox.fm lc",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.2.1"
+  }
+}
