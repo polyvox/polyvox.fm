@@ -14,13 +14,19 @@
 		<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:700,400' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
 		<link href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" rel="stylesheet">
+		<script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+		<link rel="import" href="./bower_components/iron-localstorage/iron-localstorage.html">
 		<link href="./ripples-style.css" rel="stylesheet">
 
 	</head>
 	<body>
 		<svg id="ripple-layer"></svg>
+
+		<audio src="./intro.mp3" id="audio"></audio>
+
+ 		<iron-localstorage id="storage" name="polyvox-fm-marketing-beta" value="{{stopped}}"></iron-localstorage>
+
 		<header class="main-header">
-			<audio src="./intro.mp3" id="audio" autoplay></audio>
 			<svg id="logo" viewBox="0 0 157 44" height="132" width="481">
 				<defs>
 					<filter id="dropshadow" height="140%">
@@ -57,9 +63,11 @@
 						<path
 							d="m 127.32678,21.40616 q 0,2.34375 -0.83985,4.375 -0.83984,2.01172 -2.28515,3.49609 -1.44532,1.46485 -3.39844,2.32422 -1.93359,0.83985 -4.16016,0.83985 -2.20703,0 -4.16015,-0.83985 -1.9336,-0.85937 -3.39844,-2.32422 -1.44531,-1.48437 -2.28516,-3.49609 -0.83984,-2.03125 -0.83984,-4.375 0,-2.38281 0.83984,-4.41406 0.83985,-2.03125 2.28516,-3.4961 1.46484,-1.48437 3.39844,-2.32422 1.95312,-0.83984 4.16015,-0.83984 2.22657,0 4.16016,0.80078 1.95312,0.78125 3.39844,2.2461 1.44531,1.44531 2.28515,3.49609 0.83985,2.03125 0.83985,4.53125 z"
 							style="fill:#ffffff;" />
-						<path
-							d="m 122.50412,21.54327 q 0,-1.28906 -0.40619,-2.32422 -0.38776,-1.05469 -1.07093,-1.79687 -0.68316,-0.76172 -1.60636,-1.15235 -0.90473,-0.41015 -1.93872,-0.41015 -1.03398,0 -1.95718,0.41015 -0.90473,0.39063 -1.58791,1.15235 -0.6647,0.74218 -1.05245,1.79687 -0.38773,1.03516 -0.38773,2.32422 0,1.21094 0.38773,2.24609 0.38775,1.03516 1.05245,1.79688 0.68318,0.76172 1.58791,1.21094 0.9232,0.42968 1.95718,0.42968 1.03399,0 1.93872,-0.41015 0.9232,-0.41016 1.60636,-1.15235 0.68317,-0.74218 1.07093,-1.79687 0.40619,-1.05469 0.40619,-2.32422 z"
-							style="fill:#bcaaa4;" />
+						<path id="play-play" d="m 124,21.54327 l -10,-5 l 0,10 z" fill="#bcaaa4" style="display: none;"/>
+						<g id="pause-pause" style="display: none;">
+							<path d="m 122,27 l -4,0 l 0, -10, l 4, 0 z" style="fill:#bcaaa4;"/>
+							<path d="m 117,27 l -4,0 l 0, -10, l 4, 0 z" style="fill:#bcaaa4;"/>
+						</g>
 						<path
 							d="m 116.39843,5.2337736 c -6.9733,1.0798502 -10.16849,5.4088304 -11.68665,9.8406904 -0.25052,0.169501 -0.51396,0.345247 -0.75977,0.605215 -0.45055,0.476572 -0.82504,1.043677 -1.13867,1.688305 -0.32109,0.659913 -0.5527,1.380648 -0.70312,2.151453 -0.1485,0.760875 -0.20396,1.505313 -0.1543,2.23079 0.002,0.03968 0.011,0.07888 0.0254,0.116238 l 0.002,0.0038 c 0.0565,0.656891 0.17321,1.277825 0.39258,1.843305 l 0.006,0.01294 c 0.23812,0.592262 0.56743,1.128503 1.00781,1.573918 0.004,0.0047 0.009,0.0085 0.0137,0.01294 0.47166,0.462562 1.07645,0.792958 1.74804,0.918889 0.67344,0.126318 1.37238,0.04053 1.9961,-0.226959 l 0.006,-0.0038 0.004,-0.0019 c 0.5875,-0.256718 1.10466,-0.638913 1.55078,-1.11078 l 0.004,-0.0057 c 0.44734,-0.478839 0.82244,-1.044791 1.13476,-1.682778 l 0,-0.0019 c 0.0171,-0.03458 0.0289,-0.07123 0.0352,-0.108859 l 0.002,-0.0076 c 0.29302,-0.626405 0.52332,-1.295558 0.66407,-2.016746 0.15638,-0.801347 0.21581,-1.565378 0.16601,-2.295371 -0.0472,-0.715822 -0.1829,-1.377333 -0.42383,-1.978003 -0.008,-0.01842 -0.0168,-0.03628 -0.0273,-0.05347 -0.23661,-0.577969 -0.56942,-1.100832 -1.02344,-1.52041 l -0.002,-0.0019 c -0.24137,-0.226903 -0.50791,-0.353391 -0.76563,-0.457593 1.48039,-3.659554 4.48639,-6.3316594 7.99311,-7.0854592 m -7.75341,17.2099332 c 0.0238,-0.02579 0.0442,-0.05432 0.0605,-0.08484 z m -5.30859,0.429922 c 0.01,0.0085 0.0397,0.03325 0.0449,0.03694 z"
 							style="fill:#01579b;stroke:#01579b;stroke-width:0.5;" />
@@ -152,6 +160,9 @@
 		var ripples = document.getElementById('ripple-layer');
 		var logo = document.getElementById('o-logo');
 		var audio = document.getElementById('audio');
+		var storage = document.getElementById('storage');
+		var play = document.getElementById('play-play');
+		var pause = document.getElementById('pause-pause');
 
 		var context = new window.AudioContext();
 		var source = context.createMediaElementSource(audio);
@@ -169,6 +180,10 @@
 			offsetY = boundingBox.top + boundingBox.height / 2;
 		});
 		audio.addEventListener('ended', function () { ended = true; });
+		logo.addEventListener('click', function () {
+			storage.value = !storage.value;
+			changePlayState();
+		});
 
 		var decreasing = false;
 		var previousPreviousVolume = 0;
@@ -183,8 +198,16 @@
 		var logoY = 10;
 		var logoWidth = logo.getBoundingClientRect().width / 2;
 
-		function createCircle () {
-			var shape = ripples.createElement('circle');
+		function changePlayState () {
+			if (storage.value) {
+				play.style.display = 'block';
+				pause.style.display = 'none';
+				audio.pause();
+			} else if (!ended) {
+				play.style.display = 'none';
+				pause.style.display = 'block';
+				audio.play();
+			}
 		}
 
 		function Ripple (radius) {
@@ -272,6 +295,7 @@
 			window.requestAnimationFrame(zaboomafoo);
 		}
 
+		changePlayState();
 		window.requestAnimationFrame(getVolume);
 		window.requestAnimationFrame(zaboomafoo);
 		</script>
