@@ -11,7 +11,7 @@
 	<body>
 		<svg id="ripple-layer"></svg>
 		<header class="main-header">
-			<audio src="./intro.mp3" autoplay id="audio"></audio>
+			<audio src="./intro.mp3" id="audio" autoplay></audio>
 			<svg id="logo" viewBox="0 0 157 44" height="132" width="481">
 				<defs>
 					<filter id="dropshadow" height="140%">
@@ -63,7 +63,80 @@
 			</svg>
 		</header>
 		<main>
-			
+			<section class="sign-up">
+				<nav class="nav">
+					<a href="/">Back</a>
+				</nav>
+				<p>Get an invite for the beta!</p>
+				<form class="pure-form">
+					<input type="email" placeholder="your email address">
+					<button type="submit" class="pure-button pure-button-primary">BOOM!</button>
+				</form>
+			</section>			
+			<section class="feature-tile">
+				<header>
+					<h1>Podcasting made simple</h1>
+				</header>
+				<div class="feature-tile-content left">
+					<div>
+						<img src="https://openclipart.org/download/231485/Archer.svg" class="tile-img">
+					</div>
+					<p>
+						YOLO chicharrones tacos art party, celiac schlitz +1 hoodie.
+						Intelligentsia hella hashtag whatever portland cardigan. +1 kale
+						chips freegan, keffiyeh beard single-origin coffee meditation kogi
+						vice tilde synth.
+					</p>
+				</div>
+			</section>
+			<section class="feature-tile">
+				<header>
+					<h1>Record to the cloud</h1>
+				</header>
+				<div class="feature-tile-content left">
+					<div>
+						<img src="https://openclipart.org/download/231728/GentlemanPig.svg" class="tile-img">
+					</div>
+					<p>
+						Yr PBR&B authentic gentrify bespoke, messenger bag biodiesel twee
+						tattooed gastropub fanny pack. Keffiyeh tattooed microdosing ugh
+						intelligentsia pug blog, banjo farm-to-table tofu chia fixie.
+					</p>
+				</div>
+			</section>
+			<section class="feature-tile">
+				<header>
+					<h2>Show makers</h2>
+					<h1>Find guests and cohosts</h1>
+				</header>
+				<div class="feature-tile-content right">
+					<div>
+						<img src="https://openclipart.org/download/231089/1445961842.svg" class="tile-img">
+					</div>
+					<p>
+						Tote bag synth slow-carb, flexitarian vice blue bottle vinyl.
+						Intelligentsia pop-up occupy, craft beer seitan actually offal cray
+						cornhole literally crucifix post-ironic put a bird on it yuccie raw
+						denim.
+					</p>
+				</div>
+			</section>
+			<section class="feature-tile">
+				<header>
+					<h2>Sponsors</h2>
+					<h1>Find podcasts</h1>
+				</header>
+				<div class="feature-tile-content right">
+					<div>
+						<img src="https://openclipart.org/download/231241/VirginMary.svg" class="tile-img">
+					</div>
+					<p>
+						IPhone williamsburg XOXO, next level sriracha seitan ugh cardigan
+						listicle put a bird on it butcher. Craft beer normcore everyday
+						carry tote bag.
+					</p>
+				</div>
+			</section>
 		</main>
 		<script>
 		var ended = false;
@@ -81,6 +154,11 @@
 		source.connect(analyzer);
 		analyzer.connect(context.destination);
 
+		window.addEventListener('resize', function () {
+			var boundingBox = document.getElementById('logo').getBoundingClientRect();
+			offsetX = boundingBox.left + boundingBox.width - 124;
+			offsetY = boundingBox.top + boundingBox.height / 2;
+		});
 		audio.addEventListener('ended', function () { ended = true; });
 
 		var decreasing = false;
@@ -89,8 +167,9 @@
 		var volume = 0;
 		var changed = false;
 
-		var offsetX = document.getElementById('logo').offsetLeft + document.getElementById('logo').clientWidth - 124;
-		var offsetY = document.getElementById('logo').offsetTop + document.getElementById('logo').clientHeight / 2;
+		var boundingBox = document.getElementById('logo').getBoundingClientRect();
+		var offsetX = boundingBox.left + boundingBox.width - 124;
+		var offsetY = boundingBox.top + boundingBox.height / 2;
 		var logoX = 115;
 		var logoY = 10;
 		var logoWidth = logo.getBoundingClientRect().width / 2;
@@ -162,7 +241,6 @@
 			
 			window.requestAnimationFrame(getVolume);			
 		}
-		window.requestAnimationFrame(getVolume);
 
 		function zaboomafoo () {
 			if (ended) {
@@ -184,6 +262,8 @@
 			
 			window.requestAnimationFrame(zaboomafoo);
 		}
+
+		window.requestAnimationFrame(getVolume);
 		window.requestAnimationFrame(zaboomafoo);
 		</script>
 	</body>

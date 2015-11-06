@@ -23,6 +23,11 @@ header {
 main {
 		order: 0;
 		flex: 1;
+		display: flex;
+		flex-wrap: wrap;
+		overflow: auto;
+		align-items: flex-start;
+		justify-content: center;
 }
 
 a {
@@ -30,6 +35,10 @@ a {
 		color: #2196F3;
 		text-decoration: none;
 		font-family: "Roboto Condensed", "Arial Narrow", sans-serif;
+}
+
+.nav {
+		flex: 1;
 }
 
 #ripple-layer {
@@ -54,3 +63,75 @@ a {
 		order: 1;
 		text-align: center;
 }
+
+.sign-up {
+		box-sizing: border-box;
+		padding: 0 1em 0 1em;
+		flex: 0 0 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #3E2723;
+		color: white;
+}
+
+.sign-up p {
+		margin-right: 1em;
+		font-size: 138%;
+}
+
+.feature-tile {
+		margin: 0;
+		padding: 0;
+		flex: 0 0 40%;
+		min-width: 256px;
+		overflow: hidden;
+}
+
+.feature-tile header {
+		padding: 1em 1em 0 1em;
+		font-size: 130%;
+}
+
+.feature-tile header h2  {
+		margin: 0;
+		font-weight: 400;
+}
+
+.feature-tile header h2 + h1 {
+		margin-top: 0;
+}
+
+.feature-tile header h1 {
+		margin: 0;
+		font-weight: 400;
+}
+
+.feature-tile-content {
+		box-sizing: border-box;
+		padding: 0 1em 1em 1em;
+}
+
+.tile-img {
+		height: 150px;
+		width: auto;
+		padding: 8px;
+}
+
+.feature-tile-content p {
+		margin-top: 0;
+}
+
+.right p {
+		padding-left: .45em;
+}
+
+.right .tile-img {
+		float: right;
+}
+
+.left .tile-img {
+		float: left;
+		margin-right: 1em;
+}
+
