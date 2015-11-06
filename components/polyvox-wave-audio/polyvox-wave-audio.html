@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
 
 <dom-module is="polyvox-wave-audio">
 	<template>
@@ -7,24 +8,37 @@
 			display: flex;
 			flex-direction: column;
 		}
+		.lower-right {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
 		#wave-up { flex: 2 0 0; }
 		svg path { stroke: #FFCCBC; stroke-width: 4px; fill: #FFCCBC; }
 		</style>
-		<audio id="audio" src="[[src]]" volume="1" autoplay></audio>
+		<iron-localstorage name="polyvox-fm-marketing-beta" value="{{stopped}}"></iron-localstorage>
+		<audio id="audio" src="[[src]]" volume="1"></audio>
 		<svg id="wave-up" viewBox="0 0 1024 256" preserveAspectRatio="none">
-			<!-- g transform="translate(0 256) scale(1 -1)" -->
-				<path id="wave-up-path" d="M0,256L1024,256" />
-			<!-- /g -->
+			<path id="wave-up-path" d="M0,256L1024,256" />
 		</svg>
+		<div class="lower-right">
+			Pause: 
+			<input type="checkbox" checked="{{stopped::change}}">
+		</div>
 	</template>
 	<script>
 	Polymer({
 		is: 'polyvox-wave-audio',
 		properties: {
-			src: String
+			src: String,
+			stopped: {
+				type: Boolean,
+				observer: '_endedChanged'
+			}
 		},
 		attached: function () {
 			var context = new this._contextClass();
+			var self = this;
 			this._analyzer = context.createAnalyser();
 			this._analyzer.fftSize = 2048;
 
@@ -35,7 +49,10 @@
 			this._bufferLength = this._analyzer.frequencyBinCount;
 			this._data = new Uint8Array(this._bufferLength);
 
-			this.$.audio.addEventListener('ended', this._ended.bind(this));
+			this.$.audio.addEventListener('playing', function PlayingEventListener () {
+				self.$.audio.removeEventListener('playing', PlayingEventListener);
+				self.$.audio.addEventListener('ended', self._over.bind(self));
+			});
 
 			this._getData();
 			this._drawData();
@@ -49,19 +66,20 @@
 			}
 			height = max * (height - min) / (max - min);
 			height = 256 - ((point / 1024) * height);
-			// height = 256 - ((1 - Math.abs((point / 512) - 1)) * (height));
 
 			return height;
 		},
 		_getData: function () {
-			if(this._stopped) {
+			if(this._ended || this.stopped) {
 				return;
 			}
-			this._analyzer.getByteTimeDomainData(this._data);
+			if (this._analyzer) {
+				this._analyzer.getByteTimeDomainData(this._data);
+			}
 			window.requestAnimationFrame(this._getData.bind(this));
 		},
 		_drawData: function () {
-			if (this._stopped) {
+			if (this._ended || this.stopped) {
 				this.$['wave-up-path'].setAttribute('d', '');
 				return;
 			}
@@ -70,19 +88,30 @@
 			var data = this._data;
 			var spline = ['M0,256'];
 
-			for (var i = 0; i < data.length; i += 1) {
-				max = Math.max(max, data[i]);
-				min = Math.min(min, data[i]);
-			}
-			for (var i = 1; i < data.length; i += 1) {
-				spline.push('L' + i + ',' + this._normalize(i, data[i], min, max));
+			if (data) {
+				for (var i = 0; i < data.length; i += 1) {
+					max = Math.max(max, data[i]);
+					min = Math.min(min, data[i]);
+				}
+				for (var i = 1; i < data.length; i += 1) {
+					spline.push('L' + i + ',' + this._normalize(i, data[i], min, max));
+				}
 			}
 			spline.push("L1024,256");
 			this.$['wave-up-path'].setAttribute('d', spline.join(''));
  			window.requestAnimationFrame(this._drawData.bind(this));
 		},
-		_ended: function () {
-			this._stopped = true;
+		_over: function () {
+			this._ended = true;
+		},
+		_endedChanged: function () {
+			if (this.stopped) {
+				this.$.audio.pause();
+			} else {
+				this.$.audio.play();
+				this._getData();
+				this._drawData();
+			}
 		}
 	});
 	</script>

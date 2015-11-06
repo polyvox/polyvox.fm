@@ -163,3 +163,16 @@ a {
 		width: 100%;
 		height: auto;
 }
+
+.tagline {
+		margin-left: 1em;
+		align-self: flex-end;
+}
+
+.main-tagline {
+		font-size: 1.6em;
+}
+
+.sub-tagline {
+		font-size: 1.3em;
+}
