@@ -1,0 +1,56 @@
+html, body {
+		height: 100%;
+		color: #5D4037;
+}
+
+html {
+		font-family: Roboto, Helvetica, Verdana, sans-serif;
+		background: radial-gradient(ellipse at 75% 75%, #FFECB3 20%, #FFFDE7 100%);
+}
+
+body {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+}
+
+header {
+		font-family: "Roboto Condensed", "Arial Narrow", sans-serif;
+}
+
+main {
+		order: 0;
+		flex: 1;
+}
+
+a {
+		text-transform: uppercase;
+		color: #2196F3;
+		text-decoration: none;
+		font-family: "Roboto Condensed", "Arial Narrow", sans-serif;
+}
+
+#ripple-layer {
+		z-index: -1;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+}
+
+#logo {
+		height: 132px;
+		width: 481px;
+}
+
+.polyvox-font {
+		font-family: Righteous, Impact, monospace;
+		text-transform: lowercase;
+}
+
+.main-header {
+		flex: 0 0 180px;
+		order: 1;
+		text-align: center;
+}
