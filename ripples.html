@@ -22,8 +22,6 @@
 	<body>
 		<svg id="ripple-layer"></svg>
 
-		<audio src="./intro.mp3" id="audio"></audio>
-
  		<iron-localstorage id="storage" name="polyvox-fm-marketing-beta" value="{{stopped}}"></iron-localstorage>
 
 		<header class="main-header">
@@ -156,31 +154,24 @@
 				</div>
 			</section>
 		</main>
+		<script src="./audio.js"></script>
+		<script src="./ripple.js"></script>
 		<script>
 		var ended = false;
 		var ripples = document.getElementById('ripple-layer');
 		var logo = document.getElementById('o-logo');
-		var audio = document.getElementById('audio');
 		var storage = document.getElementById('storage');
 		var play = document.getElementById('play-play');
 		var pause = document.getElementById('pause-pause');
 
-		var context = new window.AudioContext();
-		var source = context.createMediaElementSource(audio);
-		var analyzer = context.createAnalyser();
-		analyzer.fftSize = 2048;
-
-		var data = new Uint8Array(analyzer.frequencyBinCount);
-
-		source.connect(analyzer);
-		analyzer.connect(context.destination);
+		var analyzer = new Polyvox.Audio.Analyzer('./intro.mp3');
+		analyzer.addEventListener('ended', function () { ended = true; });
 
 		window.addEventListener('resize', function () {
 			var boundingBox = document.getElementById('logo').getBoundingClientRect();
 			offsetX = boundingBox.left + boundingBox.width - 124;
 			offsetY = boundingBox.top + boundingBox.height / 2;
 		});
-		audio.addEventListener('ended', function () { ended = true; });
 		logo.addEventListener('click', function () {
 			storage.value = !storage.value;
 			changePlayState();
@@ -200,100 +191,60 @@
 		var logoWidth = logo.getBoundingClientRect().width / 2;
 
 		function changePlayState () {
-			if (storage.value) {
-				play.style.display = 'block';
-				pause.style.display = 'none';
-				audio.pause();
-			} else if (!ended) {
-				play.style.display = 'none';
-				pause.style.display = 'block';
-				audio.play();
-			}
+		  if (storage.value) {
+		    play.style.display = 'block';
+		    pause.style.display = 'none';
+		    analyzer.pause();
+		  } else if (!ended) {
+		    play.style.display = 'none';
+		    pause.style.display = 'block';
+		    analyzer.play();
+		  }
 		}
-
-		function Ripple (radius) {
-			this._radius = radius;
-			this._opacity = 1;
-			this.node = ripples.ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'circle');
-			this.node.setAttribute('stroke', '#F9A825');
-			this.node.setAttribute('stroke-width', '4');
-			this.node.setAttribute('fill', 'none');
-			this.node.setAttribute('cx', offsetX);
-			this.node.setAttribute('cy', offsetY);
-			ripples.appendChild(this.node);
-
-			this._update();
-			
-			window.requestAnimationFrame(this.start.bind(this));
-			
-			return this;
-		}
-
-		Ripple.prototype._update = function () {
-			this.node.setAttribute('opacity', this._opacity);
-			this.node.setAttribute('r', this._radius);
-		};			
-
-		Ripple.prototype.start = function () {
-			this._radius += 2;
-			this._opacity -= 0.01;
-
-			if (this._opacity < 0) {
-				if (this.node != null) {
-					this.node.parentNode.removeChild(this.node);
-				}
-				this.node = null;
-				return;
-			}
-
-			this._update();
-
-			window.requestAnimationFrame(this.start.bind(this));
-		};
 
 		function getVolume () {
-			previousPreviousVolume = previousVolume;
-			previousVolume = volume;
-			volume = 0;
+		  previousPreviousVolume = previousVolume;
+		  previousVolume = volume;
+		  volume = 0;
 
-			if (ended) {
-				return;
-			}
+		  if (ended) {
+		    return;
+		  }
 
-			analyzer.getByteFrequencyData(data);
+		  var data = analyzer.getByteFrequencyData();
 
-			for (var i = 0; i < data.length; i += 1) {
-				if (!isNaN(data[i])) {
-					volume += data[i];
-				}
-			}
+		  for (var i = 0; i < data.length; i += 1) {
+		    if (!isNaN(data[i])) {
+		      volume += data[i];
+		    }
+		  }
 
-			volume = volume / data.length;
+		  volume = volume / data.length;
 
-			changed = previousVolume < volume && previousVolume < previousPreviousVolume;
-			
-			window.requestAnimationFrame(getVolume);			
+		  changed = previousVolume < volume && previousVolume < previousPreviousVolume;
+		  
+		  window.requestAnimationFrame(getVolume);			
 		}
 
 		function zaboomafoo () {
-			if (ended) {
-				logo.setAttribute('transform', '');
-				logo.setAttribute('filter', '');
-				return;
-			}
+		  if (ended) {
+		    logo.setAttribute('transform', '');
+		    logo.setAttribute('filter', '');
+		    return;
+		  }
 
-			var ratio = 1 + (volume / 35) * 0.3;
-			var dx = logoX - ratio * logoX;
-			var dy = logoY - ratio * logoY;
-			var transform = ['translate(', dx, ' ', dy, ') scale(', ratio, ')'];
-			logo.setAttribute('transform', transform.join(''));
+		  var ratio = 1 + (volume / 35) * 0.3;
+		  var dx = logoX - ratio * logoX;
+		  var dy = logoY - ratio * logoY;
+		  var transform = ['translate(', dx, ' ', dy, ') scale(', ratio, ')'];
+		  logo.setAttribute('transform', transform.join(''));
 
-			if (changed) {
-				new Ripple(logoWidth * ratio).start();
-				changed = false;
-			}
-			
-			window.requestAnimationFrame(zaboomafoo);
+		  if (changed) {
+		    new Ripple(logoWidth * ratio, ripples, offsetX, offsetY).start();
+		    changed = false;
+		  }
+		  
+		  window.requestAnimationFrame(zaboomafoo);
 		}
 
 		changePlayState();
