@@ -61,6 +61,7 @@
 						<path
 							d="m 127.32678,21.40616 q 0,2.34375 -0.83985,4.375 -0.83984,2.01172 -2.28515,3.49609 -1.44532,1.46485 -3.39844,2.32422 -1.93359,0.83985 -4.16016,0.83985 -2.20703,0 -4.16015,-0.83985 -1.9336,-0.85937 -3.39844,-2.32422 -1.44531,-1.48437 -2.28516,-3.49609 -0.83984,-2.03125 -0.83984,-4.375 0,-2.38281 0.83984,-4.41406 0.83985,-2.03125 2.28516,-3.4961 1.46484,-1.48437 3.39844,-2.32422 1.95312,-0.83984 4.16015,-0.83984 2.22657,0 4.16016,0.80078 1.95312,0.78125 3.39844,2.2461 1.44531,1.44531 2.28515,3.49609 0.83985,2.03125 0.83985,4.53125 z"
 							style="fill:#ffffff;" />
+						<path id="just-o" d="m 122.50412,21.54327 q 0,-1.28906 -0.40619,-2.32422 -0.38776,-1.05469 -1.07093,-1.79687 -0.68316,-0.76172 -1.60636,-1.15235 -0.90473,-0.41015 -1.93872,-0.41015 -1.03398,0 -1.95718,0.41015 -0.90473,0.39063 -1.58791,1.15235 -0.6647,0.74218 -1.05245,1.79687 -0.38773,1.03516 -0.38773,2.32422 0,1.21094 0.38773,2.24609 0.38775,1.03516 1.05245,1.79688 0.68318,0.76172 1.58791,1.21094 0.9232,0.42968 1.95718,0.42968 1.03399,0 1.93872,-0.41015 0.9232,-0.41016 1.60636,-1.15235 0.68317,-0.74218 1.07093,-1.79687 0.40619,-1.05469 0.40619,-2.32422 z" fill="#bcaaa4" style="display: none;"/>
 						<path id="play-play" d="m 124,21.54327 l -10,-5 l 0,10 z" fill="#bcaaa4" style="display: none;"/>
 						<g id="pause-pause" style="display: none;">
 							<path d="m 122,27 l -4,0 l 0, -10, l 4, 0 z" style="fill:#bcaaa4;"/>
@@ -163,6 +164,16 @@
 		var storage = document.getElementById('storage');
 		var play = document.getElementById('play-play');
 		var pause = document.getElementById('pause-pause');
+		var justo = document.getElementById('just-o');
+		var storageLoaded = false;
+
+		storage.addEventListener('iron-localstorage-load', function () {
+		  storageLoaded = true;
+		});
+		storage.addEventListener('iron-localstorage-load-empty', function () {
+		  storage.value = false;
+		  storageLoaded = true;
+		});
 
 		var analyzer = new Polyvox.Audio.Analyzer('./intro.mp3');
 		analyzer.addEventListener('ended', function () { ended = true; });
@@ -191,7 +202,10 @@
 		var logoWidth = logo.getBoundingClientRect().width / 2;
 
 		function changePlayState () {
-		  if (storage.value) {
+		  if (!storageLoaded && storage.value === undefined) {
+		    return setTimeout(changePlayState, 10);
+		  }
+		  if (!ended && storage.value) {
 		    play.style.display = 'block';
 		    pause.style.display = 'none';
 		    analyzer.pause();
@@ -199,6 +213,10 @@
 		    play.style.display = 'none';
 		    pause.style.display = 'block';
 		    analyzer.play();
+		  } else {
+		    play.style.display = 'none';
+		    pause.style.display = 'none';
+		    justo.style.display = 'block';
 		  }
 		}
 
@@ -230,7 +248,7 @@
 		  if (ended) {
 		    logo.setAttribute('transform', '');
 		    logo.setAttribute('filter', '');
-		    return;
+		    return changePlayState();
 		  }
 
 		  var ratio = 1 + (volume / 35) * 0.3;
