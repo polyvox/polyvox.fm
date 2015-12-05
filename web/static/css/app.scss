@@ -1,10 +1,16 @@
 $text-color: #5D4037;
+$navbar-default-bg: #3E2723;
+$navbar-default-brand-color: white;
+$navbar-default-color: white;
 @import "bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:400);
 
 html, body {
-	height: 100%;
 	font-family: 'Roboto', sans-serif;
+
+	@media (min-width: 768px) {
+		height: 100%;
+	}
 }
 
 input, button {
@@ -23,6 +29,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
 	padding-top: 0;
+	background: radial-gradient(ellipse at 75% 75%, #FFECB3 20%, #FFFDE7 100%);
 
 	@media (min-width: 768px) {
 		display: flex;
@@ -54,6 +61,13 @@ main {
 .navbar-form {
 	border-bottom: 0;
 	margin-top: 0;
+	color: $navbar-default-color;
+
+	label {
+		padding-right: 0em;
+		font-weight: 400;
+		letter-spacing: .1em;
+	}
 
 	@media (min-width: 768px) {
 		margin-top: 8px;
@@ -84,10 +98,6 @@ main {
 	flex: 1 0 34%;
 }
 
-.btn {
-	@include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
-}
-
 .content {
 	display: flex;
 	align-items: stretch;
@@ -114,7 +124,7 @@ main {
 }
 
 .img {
-	flex: 1 1 0;
+	flex: 1 1 75px;
 	background-color: $gray-lighter;
 }
 
