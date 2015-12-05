@@ -2,41 +2,6 @@ $text-color: #5D4037;
 @import "bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:400);
 
-// .visible-xs-flex,
-// .visible-sm-flex,
-// .visible-md-flex,
-// .visible-lg-flex {
-//	 display: none !important;
-// }
-
-// .visible-xs-flex {
-//	 @media (max-width: $screen-xs-max) {
-//		 display: flex !important;
-//	 }
-// }
-
-// .visible-sm-flex {
-//	 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-//		 display: flex !important;
-//	 }
-// }
-
-// .visible-md-flex {
-//	 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-//		 display: flex !important;
-//	 }
-// }
-
-// .visible-lg-flex {
-//	 @media (min-width: $screen-lg-min) {
-//		 display: flex !important;
-//	 }
-// }
-
-
-// ************************************************************************ //
-
-
 html, body {
 	height: 100%;
 	font-family: 'Roboto', sans-serif;
@@ -73,6 +38,7 @@ main {
 		flex-wrap: wrap;
 		justify-content: center;
 		align-content: flex-start;
+		max-width: 1200px;
 	}
 }
 
@@ -81,6 +47,7 @@ main {
 		flex: 1 0 0;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 	}
 }
 
@@ -110,13 +77,47 @@ main {
 }
 
 .two {
-	flex: 0 0 68vw;
+	flex: 2 0 68%;
 }
 
 .one {
-	flex: 0 0 34vw;
+	flex: 1 0 34%;
 }
 
 .btn {
 	@include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+}
+
+.content {
+	display: flex;
+	align-items: stretch;
+
+	&.left {
+		.copy { padding-left: 1em; }
+	}
+
+	&.right {
+		.copy { padding-left: 1em; }
+
+		@media (min-width: 768px) {
+			.img {
+				order: 2;
+			}
+
+			.copy {
+				padding-left: 0;
+				order: 1;
+				padding-right: 1em;
+			}
+		}
+	}
+}
+
+.img {
+	flex: 1 1 0;
+	background-color: $gray-lighter;
+}
+
+.copy {
+	flex: 3 1 0;
 }
