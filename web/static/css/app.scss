@@ -1,0 +1,77 @@
+@import "bootstrap";
+
+
+// .visible-xs-flex,
+// .visible-sm-flex,
+// .visible-md-flex,
+// .visible-lg-flex {
+//   display: none !important;
+// }
+
+// .visible-xs-flex {
+//   @media (max-width: $screen-xs-max) {
+//     display: flex !important;
+//   }
+// }
+
+// .visible-sm-flex {
+//   @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+//     display: flex !important;
+//   }
+// }
+
+// .visible-md-flex {
+//   @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+//     display: flex !important;
+//   }
+// }
+
+// .visible-lg-flex {
+//   @media (min-width: $screen-lg-min) {
+//     display: flex !important;
+//   }
+// }
+
+
+// ************************************************************************ //
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    padding-top: 50px;
+  }
+}
+
+.navbar-form {
+  border-bottom: 0;
+  margin-top: 0;
+
+  @media (min-width: 768px) {
+    margin-top: 8px;
+  }
+}
+
+main {
+  flex: 1;
+  order: 2;
+
+  @media (min-width: 768px) {
+    overflow: auto;
+    order: 1;
+  }
+}
+
+footer {
+  order: 1;
+
+  @media (min-width: 768px) {
+    order: 2;
+  }
+}
