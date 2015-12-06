@@ -5,10 +5,11 @@
 				<a class="navbar-brand title-y">Let your voice be heard!</a>
 				<span class="navbar-brand pull-right visible-xs-inline">We'll do the rest</span>
 			</div>
-			<form class="navbar-form navbar-right" role="signup">
+			<form class="navbar-form navbar-right" role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
+				<input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
 				<div class="form-group">
 					<label for="signup-email">here's my email</label>
-					<input id="signup-email" type="email" class="form-control" placeholder="your@email.luv">
+					<input name="application[email]" id="signup-email" type="email" class="form-control" placeholder="your@email.luv" required>
 				</div>
 				<button type="submit" class="btn btn-primary">keep me informed</button>
 			</form>

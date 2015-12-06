@@ -12,5 +12,6 @@ defmodule Polyvox.Repo.Migrations.CreateApplicant do
       timestamps
     end
 
+    create unique_index(:applicants, [:email])
   end
 end

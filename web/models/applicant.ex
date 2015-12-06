@@ -11,8 +11,8 @@ defmodule Polyvox.Applicant do
     timestamps
   end
 
-  @required_fields ~w(email name priority podcast_url podcast_name)
-  @optional_fields ~w()
+  @required_fields ~w(email)
+  @optional_fields ~w(name priority podcast_url podcast_name)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -23,5 +23,6 @@ defmodule Polyvox.Applicant do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:email)
   end
 end
