@@ -33,7 +33,7 @@ body {
 
 	@media (min-width: 768px) {
 		display: flex;
-		padding-top: 50px;
+		padding-top: 70px;
 	}
 }
 
@@ -104,12 +104,12 @@ main {
 	align-items: stretch;
 
 	&.left {
-		.copy { padding-left: 1em; }
+		@media (min-width: 768px) {
+			.copy { padding-left: 1em; }
+		}
 	}
 
 	&.right {
-		.copy { padding-left: 1em; }
-
 		@media (min-width: 768px) {
 			.img {
 				order: 2;
@@ -127,6 +127,11 @@ main {
 .img {
 	flex: 1 1 75px;
 	background-color: $gray-lighter;
+	display: none;
+
+	@media (min-width: 768px) {
+		display: block;
+	}
 }
 
 .copy {
