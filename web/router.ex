@@ -16,7 +16,8 @@ defmodule Polyvox.Router do
   scope "/", Polyvox do
     pipe_through :browser
 
-    resources "/applications", ApplicationController
+    get "/", ApplicationsController, :index
+    resources "/applications", ApplicationsController
   end
 
   # Other scopes may use custom stacks.

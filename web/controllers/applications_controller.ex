@@ -1,8 +1,8 @@
-defmodule Polyvox.ApplicationController do
+defmodule Polyvox.ApplicationsController do
   use Polyvox.Web, :controller
 
-  def update(conn, _params) do
+  def index(conn, _params) do
     conn
-    |> redirect(to: "/thanks_even_more.html")
+    |> render(:index)
   end
 end
