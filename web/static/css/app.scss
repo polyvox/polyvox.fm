@@ -41,11 +41,12 @@ main {
 	@media (min-width: 768px) {
 		display: flex;
 		flex: 1 0 0;
-		overflow: auto;
+		overflow-y: auto;
 		flex-wrap: wrap;
 		justify-content: center;
 		align-content: flex-start;
 		max-width: 1200px;
+		-webkit-overflow-scrolling: touch;
 	}
 }
 
