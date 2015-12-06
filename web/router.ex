@@ -9,12 +9,18 @@ defmodule Polyvox.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
+
+  scope "/", Polyvox do
+    pipe_through :browser
+
+    resources "/applications", ApplicationController
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", Polyvox do
-    pipe_through :api
-  end
+  # scope "/api", Polyvox do
+  #   pipe_through :api
+  # end
 end
