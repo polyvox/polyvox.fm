@@ -13,3 +13,11 @@ function fix_navbar () {
 $(window).resize(fix_navbar);
 fix_navbar();
 
+$('#application-form').click(function () {
+	var other = document.querySelector('#application_priority_other');
+	if (other && other.checked) {
+		document.querySelector('#application_priority').disabled = false;
+	} else {
+		document.querySelector('#application_priority').disabled = true;
+	}
+});

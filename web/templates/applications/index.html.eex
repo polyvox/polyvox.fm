@@ -5,14 +5,18 @@
 				<a class="navbar-brand title-y">Let your voice be heard!</a>
 				<span class="navbar-brand pull-right visible-xs-inline">We'll do the rest</span>
 			</div>
-			<form class="navbar-form navbar-right" role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
-				<input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
-				<div class="form-group">
-					<label for="signup-email">here's my email</label>
-					<input name="application[email]" id="signup-email" type="email" class="form-control" placeholder="your@email.luv" required>
-				</div>
-				<button type="submit" class="btn btn-primary">keep me informed</button>
-			</form>
+			<%= if(@changeset && @changeset.errors[:email]) do %>
+				<div id="sign-up-error" class="navbar-right navbar-text">Looks like you've already signed up. Thanks!</div>
+			<% else %>
+				<form class="navbar-form navbar-right" role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
+					<input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
+					<div class="form-group">
+						<label for="signup-email">here's my email</label>
+						<input name="application[email]" id="signup-email" type="email" class="form-control" placeholder="your@email.luv" required>
+					</div>
+					<button type="submit" class="btn btn-primary">keep me informed</button>
+				</form>
+			<% end %>
 		</div>
 	</nav>
 	<main>
