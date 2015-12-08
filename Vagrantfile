@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -43,13 +43,10 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+  config.vm.provider "virtualbox" do |vb|
+    # Customize the amount of memory on the VM:
+    vb.memory = "2048"
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -64,12 +61,19 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
     wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
     sudo dpkg -i erlang-solutions_1.0_all.deb
     rm erlang-solutions_1.0_all.deb
     sudo apt-get update
     sudo apt-get dist-upgrade -y
-    sudo apt-get install -y nginx elixir build-essential nodejs git postgresql
+    sudo apt-get install -y nginx elixir build-essential nodejs git postgresql inotify-tools mg
+    mix local.hex --force
+    mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.4/phoenix_new-1.0.4.ez --force --sha512
+    mkdir -p ~/polyvox/priv/static
+    sudo sed -i 's/root \\/usr\\/share\\/nginx\\/html;/root \\/home\\/vagrant\\/polyvox\\/priv\\/static\\/;/' /etc/nginx/sites-available/default
+    sudo sed -i 's/try_files $uri $uri\\/ =404;/proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Host $http_host; proxy_pass_header X-Accel-Redirect; proxy_read_timeout 300s; if (!-f $request_filename) { proxy_pass http:\\/\\/127.0.0.1:4000; break; }/' /etc/nginx/sites-available/default
+    sudo nginx -s reload
   SHELL
 end
+
