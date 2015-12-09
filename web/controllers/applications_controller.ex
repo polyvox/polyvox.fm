@@ -28,8 +28,18 @@ defmodule Polyvox.ApplicationsController do
         conn
         |> redirect(to: applications_path(conn, :show, model.said))
       {:error, changeset} ->
-        conn
-        |> render(:index, changeset: changeset)
+        outcome = Polyvox.Applicant
+        |> Ecto.Query.where([a], a.email == ^application["email"])
+        |> Repo.one
+
+        case outcome do
+          %{name: nil} ->
+            conn
+            |> redirect(to: applications_path(conn, :show, outcome.said))
+          _ ->
+            conn
+            |> render(:index, changeset: changeset)
+        end
     end
   end
 
