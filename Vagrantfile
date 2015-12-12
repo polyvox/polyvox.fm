@@ -69,7 +69,7 @@ Vagrant.configure(2) do |config|
 		curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 		sudo apt-get update
 		sudo apt-get dist-upgrade -y
-		sudo apt-get install -y nginx erlang erlang-dev elixir build-essential nodejs git postgresql inotify-tools mg unzip
+		sudo apt-get install -y nginx erlang erlang-dev erlang-base-hipe elixir build-essential nodejs git postgresql inotify-tools mg unzip
 		mix local.hex --force
 		mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.4/phoenix_new-1.0.4.ez --force --sha512
 		mkdir -p ~/polyvox/priv/static
