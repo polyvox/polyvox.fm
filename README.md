@@ -30,6 +30,10 @@ will fail. Sorry.
 
 ## Building
 
+**Note:** Building requires that you have committed your changes to
+`git`. If you haven't, then this won't pick up diddly. That's how we
+build around here.
+
 Now that you can build for Ubuntu servers, all you have to do is run
 
 ```
@@ -54,10 +58,5 @@ So, if you're deploying version 0.5.1, you'd type
 ./deploy.sh 0.5.1
 ```
 
-## DEPLOYING THE DATABASE
-
-Yeah, still trying to figure this one out. It's not easy with the
-Phoenix tool stack, as you well know. But, hey, that's why we're
-programmers, right?
-
-More to come...
+This will stop the remote service, upload the tarball, expand it correctly,
+and put start the service. This will migrate the database, too! *Voila!*
