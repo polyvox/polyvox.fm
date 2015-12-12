@@ -1,5 +1,5 @@
 #!/bin/bash
-# Deploy-to-vagrant, version 1
+# build-ubuntu, version 1
 
 # This script assumes a Vagrantfile in the same working
 # directory from which you run it.
