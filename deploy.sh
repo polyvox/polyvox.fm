@@ -11,13 +11,16 @@ if [ "$1" == "" ]; then
 		exit 1
 fi
 
-if [ ! -f ./rel/ubuntu/polyvox-$1.tar.gz ]; then
+SRC_PATH=./rel/ubuntu/trusty64/polyvox-$1.tar.gz
+
+if [ ! -f $SRC_PATH ]; then
 		echo "Could not find version $1"
-		echo "  Searched ./rel/ubuntu/polyvox-$1.tar.gz"
+		echo "  Searched ${SRC_PATH}"
 		exit 1
 fi
 
 DEST_DIR="/var/www/polyvox.fm/polyvox-$1"
+DEST_PATH="${DEST_DIR}/polyvox-$1.tar.gz"
 CLEAN_COMMAND="rm -rf ${DEST_DIR}"
 STAGE_COMMAND="mkdir -p ${DEST_DIR}"
 UNTAR_COMMAND="pushd ${DEST_DIR} && tar xvzf polyvox-$1.tar.gz"
@@ -25,6 +28,7 @@ UNTAR_COMMAND="pushd ${DEST_DIR} && tar xvzf polyvox-$1.tar.gz"
 ssh curweb1.curtissimo.com "sudo /var/www/polyvox.fm/stop-site.sh"
 ssh curweb1.curtissimo.com "${CLEAN_COMMAND}"
 ssh curweb1.curtissimo.com "${STAGE_COMMAND}"
-scp ./rel/ubuntu/polyvox-$1.tar.gz curweb1.curtissimo.com:${DEST_DIR}
+scp ${SRC_PATH} curweb1.curtissimo.com:${DEST_DIR}
 ssh curweb1.curtissimo.com "${UNTAR_COMMAND}"
+ssh curweb1.curtissimo.com "rm -f ${DEST_PATH}"
 ssh curweb1.curtissimo.com "sudo /var/www/polyvox.fm/start-site.sh"

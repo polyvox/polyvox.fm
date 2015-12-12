@@ -22,8 +22,8 @@ move-it-all () {
 		vagrant ssh -c "pushd ~/polyvox && mix phoenix.digest"
 		vagrant ssh -c "pushd ~/polyvox && mix release"
 		vagrant ssh -c "${START_CMD}"
-		mkdir -p rel/ubuntu
-		vagrant scp default:~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.tar.gz rel/ubuntu/polyvox-${VERSION}.tar.gz
+		mkdir -p rel/ubuntu/trusty64
+		vagrant scp default:~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.tar.gz rel/ubuntu/trusty64/polyvox-${VERSION}.tar.gz
 		open http://localhost:8080
 }
 
