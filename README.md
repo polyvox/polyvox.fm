@@ -35,3 +35,6 @@ Now that you can build for Ubuntu servers, all you have to do is run
 ```
 ./build-ubuntu.sh
 ```
+
+That first time can take a little while. So, patience as Vagrant provisions
+the VM. Unless you destroy it, later, it'll go much faster the *n+1* time.
