@@ -72,10 +72,10 @@ Vagrant.configure(2) do |config|
 		sudo apt-get install -y nginx erlang erlang-dev erlang-base-hipe elixir build-essential nodejs git postgresql inotify-tools mg unzip
 		mix local.hex --force
 		mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.4/phoenix_new-1.0.4.ez --force --sha512
-		mkdir -p ~/polyvox/priv/static
+		mkdir -p /home/vagrant/polyvox/rel/polyvox/lib/polyvox-0.0.1/priv/static
 		sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt -subj "/C=US/ST=TX/L=Houston/O=polyvox.fm/OU=IT Department/CN=localhost"
     sudo sed -i 's/listen \\[::\\]:80 default_server ipv6only=on;/listen \\[::\\]:80 default_server ipv6only=on; return 301 https:\\/\\/$host:8443$request_uri; }\\nserver {\\n\\tlisten 443; ssl_certificate \\/etc\\/nginx\\/cert.crt; ssl_certificate_key \\/etc\\/nginx\\/cert.key; ssl on;\\n/' /etc/nginx/sites-available/default
-		sudo sed -i 's/root \\/usr\\/share\\/nginx\\/html;/root \\/home\\/vagrant\\/polyvox\\/priv\\/static\\/;/' /etc/nginx/sites-available/default
+		sudo sed -i 's/root \\/usr\\/share\\/nginx\\/html;/root \\/home\\/vagrant\\/polyvox\\/rel\\/polyvox\\/lib\\/polyvox-0.0.1\\/priv\\/static\\/;/' /etc/nginx/sites-available/default
 		sudo sed -i 's/try_files $uri $uri\\/ =404;/proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Host $http_host; proxy_pass_header X-Accel-Redirect; proxy_read_timeout 300s; if (!-f $request_filename) { proxy_pass http:\\/\\/127.0.0.1:4001; break; }/' /etc/nginx/sites-available/default
 		sudo nginx -s reload
 		sudo npm install -g brunch
