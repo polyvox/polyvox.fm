@@ -38,3 +38,26 @@ Now that you can build for Ubuntu servers, all you have to do is run
 
 That first time can take a little while. So, patience as Vagrant provisions
 the VM. Unless you destroy it, later, it'll go much faster the *n+1* time.
+
+## DEPLOYING THE APPLICATION SERVER
+
+Now that you've got something built, you can use the `deploy.sh` script
+to get it to the server.
+
+```
+./deploy.sh <version>
+```
+
+So, if you're deploying version 0.5.1, you'd type
+
+```
+./deploy.sh 0.5.1
+```
+
+## DEPLOYING THE DATABASE
+
+Yeah, still trying to figure this one out. It's not easy with the
+Phoenix tool stack, as you well know. But, hey, that's why we're
+programmers, right?
+
+More to come...
