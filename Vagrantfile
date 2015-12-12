@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
   end
   #
   # View the documentation for the provider you are using for more
@@ -68,15 +68,21 @@ Vagrant.configure(2) do |config|
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get update
     sudo apt-get dist-upgrade -y
-    sudo apt-get install -y nginx elixir build-essential nodejs npm git postgresql inotify-tools mg unzip
+    sudo apt-get install -y nginx erlang erlang-dev elixir build-essential nodejs git postgresql inotify-tools mg unzip
     mix local.hex --force
     mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.4/phoenix_new-1.0.4.ez --force --sha512
     mkdir -p ~/polyvox/priv/static
-    sudo ln -s /usr/bin/nodejs /usr/bin/node
     sudo sed -i 's/root \\/usr\\/share\\/nginx\\/html;/root \\/home\\/vagrant\\/polyvox\\/priv\\/static\\/;/' /etc/nginx/sites-available/default
-    sudo sed -i 's/try_files $uri $uri\\/ =404;/proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Host $http_host; proxy_pass_header X-Accel-Redirect; proxy_read_timeout 300s; if (!-f $request_filename) { proxy_pass http:\\/\\/127.0.0.1:4000; break; }/' /etc/nginx/sites-available/default
+    sudo sed -i 's/try_files $uri $uri\\/ =404;/proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Host $http_host; proxy_pass_header X-Accel-Redirect; proxy_read_timeout 300s; if (!-f $request_filename) { proxy_pass http:\\/\\/127.0.0.1:4001; break; }/' /etc/nginx/sites-available/default
     sudo nginx -s reload
     sudo npm install -g brunch
+    mix local.rebar
+    echo "export MIX_ENV=prod" >> ~/.bash_profile
+    echo "export PORT=4001" >> ~/.bash_profile
+    sudo -u postgres createuser -d polyvox_beta_prod
+    sudo -u postgres psql -c "create database polyvox_beta_prod;"
+    sudo -u postgres psql -c "alter database polyvox_beta_prod owner to polyvox_beta_prod;"
+    sudo -u postgres psql postgres -c "alter user polyvox_beta_prod with encrypted password 'md5b22abc21810b75ae5605966301c17755';"
   SHELL
 end
 
