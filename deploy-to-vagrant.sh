@@ -5,10 +5,10 @@
 # directory from which you run it.
 
 move-it-all () {
+		vagrant up
 		vagrant ssh -c "rm -rf /home/vagrant/polyvox"
 		git archive HEAD --format=zip > archive.zip
 		zip -u archive.zip ./config/prod.secret.exs
-		vagrant up
 		vagrant scp ./archive.zip /home/vagrant/archive.zip
 		rm ./archive.zip
 		vagrant ssh -c "unzip /home/vagrant/archive.zip -d /home/vagrant/polyvox"
