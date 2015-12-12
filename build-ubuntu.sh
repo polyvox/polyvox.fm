@@ -24,6 +24,7 @@ move-it-all () {
 		vagrant ssh -c "${START_CMD}"
 		mkdir -p rel/ubuntu
 		vagrant scp default:~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.tar.gz rel/ubuntu/polyvox-${VERSION}.tar.gz
+		open http://localhost:8080
 }
 
 move-it-all
