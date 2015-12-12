@@ -5,6 +5,7 @@ got, so far:
 
 ### Mac OS X development
 
+* VirtualBox
 * Vagrant
 * vagrant-scp
 
@@ -13,10 +14,19 @@ So, to get that, here's a little thing for you to run.
 ```
 # You have to have installed brew-cask.
 # Check out http://caskroom.io
+brew cask install virtualbox
 brew cask install vagrant
 
+# Install the vagrant-scp plugin
+# We will eventually remove this as a dependency
 vagrant plugin install vagrant-scp
 ```
+
+## SECRETS!
+
+You have to know the password for the production database. So, if you're
+not in that inner circle, you can still build locally, but your push
+will fail. Sorry.
 
 ## Building
 
