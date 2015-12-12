@@ -5,8 +5,8 @@
 # directory from which you run it.
 
 VERSION=0.0.1
-STOP_CMD="if [ -f rel/polyvox/releases/${VERSION}/polyvox.sh ]; then rel/polyvox/releases/${VERSION}/polyvox.sh stop; fi"
-START_CMD="pushd ~/polyvox && rel/polyvox/releases/${VERSION}/polyvox.sh start"
+STOP_CMD="if [ -f ~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh ]; then ~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh stop; fi"
+START_CMD="~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh start && ~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh ping"
 
 move-it-all () {
 		vagrant up
