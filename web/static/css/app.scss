@@ -7,7 +7,7 @@ $navbar-default-color: white;
 
 html, body {
 	font-family: 'Roboto', sans-serif;
-  min-height: 100%;
+	min-height: 100%;
 
 	@media (min-width: 768px) {
 		height: 100%;
@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto Condensed', sans-serif;
 	font-weight: 400;
 }
-	
+
 @media (max-width: 768px) {
 	h1 { font-size: floor(($font-size-base * 1.7)); }
 	h2 { font-size: floor(($font-size-base * 1.25)); }
@@ -30,7 +30,6 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
 	padding-top: 0;
-	background: radial-gradient(ellipse at 75% 75%, #FFECB3 20%, #FFFDE7 100%);
 
 	@media (min-width: 768px) {
 		display: flex;
@@ -49,9 +48,9 @@ main {
 		max-width: 1200px;
 		-webkit-overflow-scrolling: touch;
 
-    &.vertical {
-      display: block;
-    }
+		&.vertical {
+			display: block;
+		}
 	}
 }
 
@@ -65,8 +64,12 @@ main {
 }
 
 #sign-up-error {
-  font-size: floor(($font-size-base * 1.25));
-  padding-right: 1em;
+	font-size: floor(($font-size-base * 1.25));
+	padding-right: 1em;
+}
+
+.super-yellow {
+	background: radial-gradient(ellipse at 75% 75%, #FFECB3 20%, #FFFDE7 100%);
 }
 
 .navbar-form {
@@ -149,15 +152,15 @@ main {
 }
 
 .middle-of-the-road {
-  flex: 1 0 768px;
-  max-width: 768px;
+	flex: 1 0 768px;
+	max-width: 768px;
 }
 
-.bigger {  
-  text-transform: uppercase;
+.bigger {	 
+	text-transform: uppercase;
 }
 
 .padded-when-small {
-  padding-left: 1em;
-  padding-right: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
 }

@@ -6,7 +6,8 @@ exports.config = {
 			order: {
 				before: [
 					"web/static/vendor/js/jquery-2.1.4.min.js",
-					"web/static/vendor/js/bootstrap.js"
+					"web/static/vendor/js/bootstrap.js",
+					"deps/phoenix_html/web/static/js/phoenix_html.js"
 				]
 			}
 
@@ -39,7 +40,8 @@ exports.config = {
 	paths: {
 		// Dependencies and current project directories to watch
 		watched: [
-			"web/static"
+			"web/static",
+			"deps/phoenix_html/web/static/js"
 		],
 
 		// Where to compile files to
@@ -50,7 +52,10 @@ exports.config = {
 	plugins: {
 		babel: {
 			// Do not use ES6 compiler in vendor code
-			ignore: [/web\/static\/vendor/]
+			ignore: [
+					/web\/static\/vendor/,
+					/deps/
+			]
 		},
 		sass: {
 			mode: 'native',

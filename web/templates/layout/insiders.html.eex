@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 	</head>
 
-	<body class="super-yellow">
+	<body>
 		<%= @inner %>
 		<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 	</body>
