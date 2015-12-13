@@ -33,7 +33,7 @@ defmodule Polyvox.ApplicationsController do
         |> Repo.one
 
         case outcome do
-          %{name: nil} ->
+          %{name: nil, podcast_url: nil, podcast_name: nil} ->
             conn
             |> redirect(to: applications_path(conn, :show, outcome.said))
           _ ->
