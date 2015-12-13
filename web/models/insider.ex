@@ -8,17 +8,19 @@ defmodule Polyvox.Insider do
     timestamps
   end
 
-  @required_fields ~w(name password_hash)
-  @optional_fields ~w()
-
-  @doc """
-  Creates a changeset based on the `model` and `params`.
-
-  If no params are provided, an invalid changeset is returned
-  with no validation performed.
-  """
-  def changeset(model, params \\ :empty) do
+  def password_changeset(model, params \\ :empty) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, ~w(password), [])
+    |> validate_length(:password, min: 6, max: 100)
+    |> put_hashed_password
+  end
+
+  defp put_hashed_password(%Ecto.Changeset{valid?: true, changes: %{password: pass}} = changeset) do
+    changeset
+    |> put_change(:password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+  end
+
+  defp put_hashed_password(changeset) do
+    changeset
   end
 end
