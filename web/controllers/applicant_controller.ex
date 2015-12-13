@@ -30,6 +30,7 @@ defmodule Polyvox.ApplicantController do
     else
       conn
       |> redirect(to: insider_trading_path(conn, :new))
+      |> halt
     end
   end
 end
