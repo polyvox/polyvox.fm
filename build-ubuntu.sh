@@ -4,13 +4,8 @@
 # This script assumes a Vagrantfile in the same working
 # directory from which you run it.
 
-VERSION=0.0.1
-STOP_CMD="if [ -f ~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh ]; then ~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh stop; fi"
-START_CMD="~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh start && ~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.sh ping"
-
 move-it-all () {
 		vagrant up
-		vagrant ssh -c "${STOP_CMD}"
 		vagrant ssh -c "rm -rf /home/vagrant/polyvox"
 		git archive HEAD --format=zip > archive.zip
 		zip -u archive.zip ./config/prod.secret.exs
@@ -21,10 +16,16 @@ move-it-all () {
 		vagrant ssh -c "pushd ~/polyvox && npm install && mix deps.get && mix compile && mix ecto.reset && brunch build --production"
 		vagrant ssh -c "pushd ~/polyvox && mix phoenix.digest"
 		vagrant ssh -c "pushd ~/polyvox && mix release"
-		vagrant ssh -c "${START_CMD}"
+		VERSION=$(vagrant ssh -c "ls ~/polyvox/rel/polyvox/releases | head -1" | tr -d '\n\r')
+		WORKDIR=./rel/tmp
 		mkdir -p rel/ubuntu/trusty64
-		vagrant scp default:~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.tar.gz rel/ubuntu/trusty64/polyvox-${VERSION}.tar.gz
-		open http://localhost:8080
+		mkdir -p ${WORKDIR}
+		vagrant scp default:~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.tar.gz ${WORKDIR}/polyvox-${VERSION}.tar.gz
+		mkdir -p ${WORKDIR}/polyvox
+		tar -x -v -z -C ${WORKDIR}/polyvox -f ${WORKDIR}/polyvox-${VERSION}.tar.gz
+		rm ${WORKDIR}/polyvox/releases/${VERSION}/polyvox.tar.gz
+		tar -c -v -z -f rel/ubuntu/trusty64/polyvox-${VERSION}.tar.gz -C ${WORKDIR}/polyvox .
+		rm -rf ${WORKDIR}
 }
 
 move-it-all

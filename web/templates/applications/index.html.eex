@@ -110,6 +110,6 @@
 		</section>
 	</main>
 	<footer class="visible-sm-block visible-md-block visible-lg-block">
-		
+		<%= version %>
 	</footer>
 </div>

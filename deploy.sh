@@ -20,10 +20,10 @@ if [ ! -f $SRC_PATH ]; then
 fi
 
 DEST_DIR="/var/www/polyvox.fm/polyvox-$1"
-PRIV_DIR="${DEST_DIR}/lib/polvyox-$1/priv/static"
+PRIV_DIR="${DEST_DIR}/lib/polyvox-$1/priv/static"
 DEST_PATH="${DEST_DIR}/polyvox-$1.tar.gz"
 
-CLEAN_COMMAND="rm -rf ${DEST_DIR} /var/www/polyvox.fm/latest"
+CLEAN_COMMAND="rm -rf ${DEST_DIR} /var/www/polyvox.fm/latest /var/www/polyvox.fm/latest-rel"
 STAGE_COMMAND="mkdir -p ${DEST_DIR}"
 UNTAR_COMMAND="pushd ${DEST_DIR} && tar xvzf polyvox-$1.tar.gz"
 CLEANUP_COMMAND="rm -f ${DEST_PATH}"
