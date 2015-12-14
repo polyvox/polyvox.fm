@@ -1,5 +1,5 @@
-defmodule Polyvox.Applicant do
-  use Polyvox.Web, :model
+defmodule PolyvoxMarketing.Applicant do
+  use PolyvoxMarketing.Web, :model
 
   schema "applicants" do
     field :email, :string, null: false

@@ -1,3 +1,3 @@
-defmodule Polyvox.PageView do
-  use Polyvox.Web, :view
+defmodule PolyvoxMarketing.PageView do
+  use PolyvoxMarketing.Web, :view
 end

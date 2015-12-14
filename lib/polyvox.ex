@@ -1,4 +1,4 @@
-defmodule Polyvox do
+defmodule PolyvoxMarketing do
   use Application
   require Logger
 
@@ -9,19 +9,19 @@ defmodule Polyvox do
 
     children = [
       # Start the endpoint when the application starts
-      supervisor(Polyvox.Endpoint, []),
+      supervisor(PolyvoxMarketing.Endpoint, []),
       # Start the Ecto repository
-      worker(Polyvox.Repo, []),
+      worker(PolyvoxMarketing.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Polyvox.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Polyvox.Supervisor]
+    opts = [strategy: :one_for_one, name: PolyvoxMarketing.Supervisor]
     start_value = Supervisor.start_link(children, opts)
 
-    repo_env = Application.get_env(:polyvox, Polyvox.Repo)
+    repo_env = Application.get_env(:polyvox_marketing, PolyvoxMarketing.Repo)
     if (repo_env |> Keyword.get(:auto_migrate, false)) do
       migrate_database
     end
@@ -32,7 +32,7 @@ defmodule Polyvox do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Polyvox.Endpoint.config_change(changed, removed)
+    PolyvoxMarketing.Endpoint.config_change(changed, removed)
     :ok
   end
 
@@ -41,9 +41,9 @@ defmodule Polyvox do
   """
   def migrate_database() do
     Logger.info("Migrating the database")
-    Mix.Ecto.ensure_started(Polyvox.Repo)
-    repo = Polyvox.Repo
-    mig_path = Application.app_dir(:polyvox, "priv/repo/migrations")
+    Mix.Ecto.ensure_started(PolyvoxMarketing.Repo)
+    repo = PolyvoxMarketing.Repo
+    mig_path = Application.app_dir(:polyvox_marketing, "priv/repo/migrations")
     Logger.info("Using migrations path at #{mig_path}")
     :ok = case Ecto.Storage.up(repo) do
             :ok ->

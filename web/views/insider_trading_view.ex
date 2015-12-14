@@ -1,8 +1,8 @@
-defmodule Polyvox.InsiderTradingView do
-  use Polyvox.Web, :view
+defmodule PolyvoxMarketing.InsiderTradingView do
+  use PolyvoxMarketing.Web, :view
 
   def version() do
-    {:ok, vsn} = :application.get_key(:polyvox, :vsn)
+    {:ok, vsn} = :application.get_key(:polyvox_marketing, :vsn)
     vsn |> List.to_string
   end
 end

@@ -1,5 +1,5 @@
-defmodule Polyvox.ApplicationsController do
-  use Polyvox.Web, :controller
+defmodule PolyvoxMarketing.ApplicationsController do
+  use PolyvoxMarketing.Web, :controller
 
   plug :scrub_params, "application" when action in [:create, :update]
 
@@ -9,26 +9,26 @@ defmodule Polyvox.ApplicationsController do
   end
 
   def show(conn, %{"id" => id}) do
-    model = Polyvox.Applicant
+    model = PolyvoxMarketing.Applicant
     |> Ecto.Query.where([a], a.said == ^id)
     |> Repo.one
-    |> Polyvox.Applicant.changeset(:empty)
+    |> PolyvoxMarketing.Applicant.changeset(:empty)
 
     conn
     |> render(:show, applicant: model)
   end
 
   def create(conn, %{"application" => application}) do
-    outcome = %Polyvox.Applicant{}
-    |> Polyvox.Applicant.changeset(application)
-    |> Polyvox.Repo.insert
+    outcome = %PolyvoxMarketing.Applicant{}
+    |> PolyvoxMarketing.Applicant.changeset(application)
+    |> PolyvoxMarketing.Repo.insert
 
     case outcome do
       {:ok, model} ->
         conn
         |> redirect(to: applications_path(conn, :show, model.said))
       {:error, changeset} ->
-        outcome = Polyvox.Applicant
+        outcome = PolyvoxMarketing.Applicant
         |> Ecto.Query.where([a], a.email == ^application["email"])
         |> Repo.one
 
@@ -44,11 +44,11 @@ defmodule Polyvox.ApplicationsController do
   end
 
   def update(conn, %{"id" => id, "application" => application}) do
-    outcome = Polyvox.Applicant
+    outcome = PolyvoxMarketing.Applicant
     |> Ecto.Query.where([a], a.said == ^id)
     |> Repo.one
-    |> Polyvox.Applicant.changeset(application)
-    |> Polyvox.Repo.update
+    |> PolyvoxMarketing.Applicant.changeset(application)
+    |> PolyvoxMarketing.Repo.update
 
     case outcome do
       {:ok, model} ->

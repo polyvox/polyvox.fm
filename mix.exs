@@ -1,8 +1,8 @@
-defmodule Polyvox.Mixfile do
+defmodule PolyvoxMarketing.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :polyvox,
+    [app: :polyvox_marketing,
      version: "0.1.0",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule Polyvox.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Polyvox, []},
+    [mod: {PolyvoxMarketing, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
                     :phoenix_ecto, :postgrex, :comeonin]]
   end

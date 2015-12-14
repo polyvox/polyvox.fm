@@ -1,5 +1,5 @@
-defmodule Polyvox.ApplicantView do
-  use Polyvox.Web, :view
+defmodule PolyvoxMarketing.ApplicantView do
+  use PolyvoxMarketing.Web, :view
 
   def smart_link(name, opts \\ []) do
     name = name || Keyword.get(opts, :to, "")
@@ -18,7 +18,7 @@ defmodule Polyvox.ApplicantView do
   end
 
   def version() do
-    {:ok, vsn} = :application.get_key(:polyvox, :vsn)
+    {:ok, vsn} = :application.get_key(:polyvox_marketing, :vsn)
     vsn |> List.to_string
   end
 end

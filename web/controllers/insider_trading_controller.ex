@@ -1,5 +1,5 @@
-defmodule Polyvox.InsiderTradingController do
-  use Polyvox.Web, :controller
+defmodule PolyvoxMarketing.InsiderTradingController do
+  use PolyvoxMarketing.Web, :controller
 
   plug :authenticate when action in [:edit, :update]
   plug :scrub_params, "update" when action in [:update]
@@ -10,7 +10,7 @@ defmodule Polyvox.InsiderTradingController do
   end
 
   def create(conn, %{"session" => %{"name" => insider, "password" => pass}}) do
-    case Polyvox.Auth.login_by_name_and_pass(conn, insider, pass, repo: Repo) do
+    case PolyvoxMarketing.Auth.login_by_name_and_pass(conn, insider, pass, repo: Repo) do
       {:ok, conn} ->
         conn
         |> redirect(to: applicant_path(conn, :index))
@@ -31,8 +31,8 @@ defmodule Polyvox.InsiderTradingController do
 
   def update(conn, %{"update" => params}) do
     outcome = conn.assigns.current_insider
-    |> Polyvox.Insider.password_changeset(params)
-    |> Polyvox.Repo.update
+    |> PolyvoxMarketing.Insider.password_changeset(params)
+    |> Repo.update
 
     case outcome do
       {:ok, _} ->
@@ -40,13 +40,14 @@ defmodule Polyvox.InsiderTradingController do
         |> redirect(to: applicant_path(conn, :index))
       {:error, changeset} ->
         conn
+        |> put_layout("insiders.html")
         |> render(:edit, changeset: changeset)
     end
   end
 
   def delete(conn, _) do
     conn
-    |> Polyvox.Auth.logout
+    |> PolyvoxMarketing.Auth.logout
     |> redirect(to: "/")
   end
 

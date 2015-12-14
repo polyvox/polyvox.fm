@@ -11,11 +11,11 @@
 		</div>
 	</nav>
 
-	<main>
+	<main style="flex-direction: column; justify-content: flex-start;">
 		<%= if @changeset do %>
 			<%= form_for @changeset, "/", fn f -> %>
 				<div class="alert alert-danger">
-					<ul>
+					<ul class="naked-list">
 						<%= for {attr, message} <- f.errors do %>
 							<li><%= humanize(attr) %> <%= message %></li>
 						<% end %>
@@ -28,7 +28,7 @@
 			<input type="hidden" name="_method" value="put">
 			<div class="form-group">
 				<label for="password">New password</label>
-				<input id="password" name="update[password]" type="password" class="form-control" placeholder="Secrets!" required>
+				<input id="password" name="update[password]" type="password" class="form-control" placeholder="Secrets!" autofocus required>
 			</div>
 			<div class="form-group">
 				<label for="confirm-"password">Confirm new	password</label>

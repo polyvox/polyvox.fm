@@ -1,5 +1,5 @@
-defmodule Polyvox.Router do
-  use Polyvox.Web, :router
+defmodule PolyvoxMarketing.Router do
+  use PolyvoxMarketing.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,21 +10,21 @@ defmodule Polyvox.Router do
   end
 
   pipeline :authenticated do
-    plug Polyvox.Auth, repo: Polyvox.Repo
+    plug PolyvoxMarketing.Auth, repo: PolyvoxMarketing.Repo
   end
 
   # pipeline :api do
   #   plug :accepts, ["json"]
   # end
 
-  scope "/", Polyvox do
+  scope "/", PolyvoxMarketing do
     pipe_through :browser
 
     get "/", ApplicationsController, :index
     resources "/applications", ApplicationsController
   end
 
-  scope "/insiders", Polyvox do
+  scope "/insiders", PolyvoxMarketing do
     pipe_through [:browser, :authenticated]
 
     get "/", ApplicantController, :index
@@ -33,7 +33,7 @@ defmodule Polyvox.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Polyvox do
+  # scope "/api", PolyvoxMarketing do
   #   pipe_through :api
   # end
 end

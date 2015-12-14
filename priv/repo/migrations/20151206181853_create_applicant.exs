@@ -1,4 +1,4 @@
-defmodule Polyvox.Repo.Migrations.CreateApplicant do
+defmodule PolyvoxMarketing.Repo.Migrations.CreateApplicant do
   use Ecto.Migration
 
   def change do

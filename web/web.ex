@@ -1,4 +1,4 @@
-defmodule Polyvox.Web do
+defmodule PolyvoxMarketing.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
@@ -29,11 +29,11 @@ defmodule Polyvox.Web do
     quote do
       use Phoenix.Controller
 
-      alias Polyvox.Repo
+      alias PolyvoxMarketing.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import Polyvox.Router.Helpers
+      import PolyvoxMarketing.Router.Helpers
     end
   end
 
@@ -47,7 +47,7 @@ defmodule Polyvox.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Polyvox.Router.Helpers
+      import PolyvoxMarketing.Router.Helpers
     end
   end
 
@@ -61,7 +61,7 @@ defmodule Polyvox.Web do
     quote do
       use Phoenix.Channel
 
-      alias Polyvox.Repo
+      alias PolyvoxMarketing.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
     end

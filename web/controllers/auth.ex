@@ -1,4 +1,4 @@
-defmodule Polyvox.Auth do
+defmodule PolyvoxMarketing.Auth do
   import Plug.Conn
   import Comeonin.Bcrypt, only: [checkpw: 2]
 
@@ -8,7 +8,7 @@ defmodule Polyvox.Auth do
 
   def call(conn, repo) do
     insider_id = get_session(conn, :insider_id)
-    insider = insider_id && repo.get(Polyvox.Insider, insider_id)
+    insider = insider_id && repo.get(PolyvoxMarketing.Insider, insider_id)
     assign(conn, :current_insider, insider)
   end
 
@@ -26,7 +26,7 @@ defmodule Polyvox.Auth do
 
   def login_by_name_and_pass(conn, name, given_pass, opts) do
     repo = Keyword.fetch!(opts, :repo)
-    insider = repo.get_by(Polyvox.Insider, name: name)
+    insider = repo.get_by(PolyvoxMarketing.Insider, name: name)
 
     cond do
       insider && checkpw(given_pass, insider.password_hash) ->

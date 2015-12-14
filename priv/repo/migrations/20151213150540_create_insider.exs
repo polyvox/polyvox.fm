@@ -1,4 +1,4 @@
-defmodule Polyvox.Repo.Migrations.CreateInsider do
+defmodule PolyvoxMarketing.Repo.Migrations.CreateInsider do
   use Ecto.Migration
 
   def change do

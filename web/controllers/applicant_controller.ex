@@ -1,7 +1,7 @@
-defmodule Polyvox.ApplicantController do
-  use Polyvox.Web, :controller
+defmodule PolyvoxMarketing.ApplicantController do
+  use PolyvoxMarketing.Web, :controller
 
-  alias Polyvox.Applicant
+  alias PolyvoxMarketing.Applicant
 
   plug :scrub_params, "applicant" when action in [:create, :update]
   plug :put_layout, "insiders.html"

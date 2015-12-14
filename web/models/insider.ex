@@ -1,5 +1,5 @@
-defmodule Polyvox.Insider do
-  use Polyvox.Web, :model
+defmodule PolyvoxMarketing.Insider do
+  use PolyvoxMarketing.Web, :model
 
   schema "insiders" do
     field :name, :string

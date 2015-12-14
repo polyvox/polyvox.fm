@@ -1,14 +1,14 @@
-defmodule Polyvox.Endpoint do
-  use Phoenix.Endpoint, otp_app: :polyvox
+defmodule PolyvoxMarketing.Endpoint do
+  use Phoenix.Endpoint, otp_app: :polyvox_marketing
 
-  socket "/socket", Polyvox.UserSocket
+  socket "/socket", PolyvoxMarketing.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :polyvox, gzip: false,
+    at: "/", from: :polyvox_marketing, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,5 +35,5 @@ defmodule Polyvox.Endpoint do
     key: "_polyvox_key",
     signing_salt: "56UUbMui"
 
-  plug Polyvox.Router
+  plug PolyvoxMarketing.Router
 end

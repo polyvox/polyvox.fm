@@ -1,5 +1,5 @@
-defmodule Polyvox.PageController do
-  use Polyvox.Web, :controller
+defmodule PolyvoxMarketing.PageController do
+  use PolyvoxMarketing.Web, :controller
 
   def index(conn, _params) do
     render conn, "index.html"

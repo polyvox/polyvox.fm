@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :polyvox, Polyvox.Endpoint,
+config :polyvox_marketing, PolyvoxMarketing.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "thNi5XSd/HwyIetdHUXhGL9s4gFrV2h1qevgc3MQQiUJa6MsNZt3Y/Fd6cqbphDX",
   render_errors: [accepts: ~w(html json)],
-  pubsub: [name: Polyvox.PubSub,
+  pubsub: [name: PolyvoxMarketing.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

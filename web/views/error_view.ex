@@ -1,5 +1,5 @@
-defmodule Polyvox.ErrorView do
-  use Polyvox.Web, :view
+defmodule PolyvoxMarketing.ErrorView do
+  use PolyvoxMarketing.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"
