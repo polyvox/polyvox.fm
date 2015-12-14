@@ -16,15 +16,15 @@ move-it-all () {
 		vagrant ssh -c "pushd ~/polyvox && npm install && mix deps.get && mix compile && mix ecto.reset && brunch build --production"
 		vagrant ssh -c "pushd ~/polyvox && mix phoenix.digest"
 		vagrant ssh -c "pushd ~/polyvox && mix release"
-		VERSION=$(vagrant ssh -c "ls ~/polyvox/rel/polyvox/releases | head -1" | tr -d '\n\r')
+		VERSION=$(vagrant ssh -c "ls ~/polyvox/rel/polyvox_marketing/releases | head -1" | tr -d '\n\r')
 		WORKDIR=./rel/tmp
 		mkdir -p rel/ubuntu/trusty64
 		mkdir -p ${WORKDIR}
-		vagrant scp default:~/polyvox/rel/polyvox/releases/${VERSION}/polyvox.tar.gz ${WORKDIR}/polyvox-${VERSION}.tar.gz
-		mkdir -p ${WORKDIR}/polyvox
-		tar -x -v -z -C ${WORKDIR}/polyvox -f ${WORKDIR}/polyvox-${VERSION}.tar.gz
-		rm ${WORKDIR}/polyvox/releases/${VERSION}/polyvox.tar.gz
-		tar -c -v -z -f rel/ubuntu/trusty64/polyvox-${VERSION}.tar.gz -C ${WORKDIR}/polyvox .
+		vagrant scp default:~/polyvox/rel/polyvox_marketing/releases/${VERSION}/polyvox_marketing.tar.gz ${WORKDIR}/polyvox-marketing-${VERSION}.tar.gz
+		mkdir -p ${WORKDIR}/polyvox_marketing
+		tar -x -v -z -C ${WORKDIR}/polyvox_marketing -f ${WORKDIR}/polyvox-marketing-${VERSION}.tar.gz
+		rm ${WORKDIR}/polyvox_marketing/releases/${VERSION}/polyvox_marketing.tar.gz
+		tar -c -v -z -f rel/ubuntu/trusty64/polyvox-marketing-${VERSION}.tar.gz -C ${WORKDIR}/polyvox_marketing .
 		rm -rf ${WORKDIR}
 }
 
