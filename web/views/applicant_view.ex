@@ -16,4 +16,9 @@ defmodule Polyvox.ApplicantView do
       _ -> uri
     end
   end
+
+  def version() do
+    {:ok, vsn} = :application.get_key(:polyvox, :vsn)
+    vsn |> List.to_string
+  end
 end

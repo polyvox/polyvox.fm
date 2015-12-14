@@ -1,0 +1,44 @@
+<div id="pseudo-body">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<div class="navbar-brand title-y">Insiders!</div>
+			</div>
+			<div class="navbar-header navbar-right">
+				<%= link("Applicant List", to: applicant_path(@conn, :index), class: "navbar-text") %>
+				<%= link("Logout", to: insider_trading_path(@conn, :delete, 0), method: :delete, class: "navbar-text") %>
+			</div>
+		</div>
+	</nav>
+
+	<main>
+		<%= if @changeset do %>
+			<%= form_for @changeset, "/", fn f -> %>
+				<div class="alert alert-danger">
+					<ul>
+						<%= for {attr, message} <- f.errors do %>
+							<li><%= humanize(attr) %> <%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+		<% end %>
+		
+		<%= form_tag(insider_trading_path(@conn, :update, 0)) %>
+			<input type="hidden" name="_method" value="put">
+			<div class="form-group">
+				<label for="password">New password</label>
+				<input id="password" name="update[password]" type="password" class="form-control" placeholder="Secrets!" required>
+			</div>
+			<div class="form-group">
+				<label for="confirm-"password">Confirm new	password</label>
+				<input id="confirm-password" name="update[password_confirmation]" type="password" class="form-control" placeholder="Secrets!" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Log in</button>
+		</form>
+	</main>
+
+	<footer class="visible-sm-block visible-md-block visible-lg-block">
+		<%= version %>
+	</footer>
+</div>

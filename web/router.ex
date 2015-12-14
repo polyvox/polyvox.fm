@@ -29,7 +29,7 @@ defmodule Polyvox.Router do
 
     get "/", ApplicantController, :index
     resources "/applicants", ApplicantController, only: [:index, :delete]
-    resources "/trading", InsiderTradingController, only: [:new, :create, :delete]
+    resources "/trading", InsiderTradingController, only: [:new, :create, :delete, :edit, :update]
   end
 
   # Other scopes may use custom stacks.
