@@ -3,7 +3,7 @@
 		<%= form_tag(insider_trading_path(@conn, :create)) %>
 			<div class="form-group">
 				<label for="name">Name</label>
-				<input id="name" name="session[name]" type="text" class="form-control" placeholder="Gomer Pyle">
+				<input id="name" name="session[name]" type="text" class="form-control" placeholder="Gomer Pyle" autofocus>
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>
