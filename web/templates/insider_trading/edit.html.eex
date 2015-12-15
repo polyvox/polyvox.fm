@@ -13,7 +13,7 @@
 
 	<main style="flex-direction: column; justify-content: flex-start;">
 		<%= if @changeset do %>
-			<%= form_for @changeset, "/", fn f -> %>
+			<%= form_for @changeset, "/", [style: "margin: auto;"], fn f -> %>
 				<div class="alert alert-danger">
 					<ul class="naked-list">
 						<%= for {attr, message} <- f.errors do %>
@@ -24,7 +24,7 @@
 			<% end %>
 		<% end %>
 		
-		<%= form_tag(insider_trading_path(@conn, :update, 0)) %>
+		<%= form_tag(insider_trading_path(@conn, :update, 0), style: "margin: auto;") %>
 			<input type="hidden" name="_method" value="put">
 			<div class="form-group">
 				<label for="password">New password</label>

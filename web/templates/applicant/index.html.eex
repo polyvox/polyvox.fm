@@ -5,7 +5,7 @@
 				<div class="navbar-brand title-y">Insiders!</div>
 			</div>
 			<div class="navbar-header navbar-right">
-				<%= link("Change Password", to: insider_trading_path(@conn, :edit, 0), class: "navbar-text") %>
+				<%= link("Change Password", to: insider_trading_path(@conn, :edit, 0), class: "navbar-text link") %>
 				<%= link("Logout", to: insider_trading_path(@conn, :delete, 0), method: :delete, class: "navbar-text") %>
 			</div>
 		</div>
