@@ -35,7 +35,6 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :polyvox_marketing, PolyvoxMarketing.Repo,
   adapter: Ecto.Adapters.Postgres,
-  auto_migrate: true,
   username: "postgres",
   password: "postgres",
   database: "polyvox_dev",
