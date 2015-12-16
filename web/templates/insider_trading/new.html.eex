@@ -1,18 +1,23 @@
-<div id="pseudo-body">
-	<main>
-		<%= form_tag(insider_trading_path(@conn, :create)) %>
-			<div class="form-group">
-				<label for="name">Name</label>
-				<input id="name" name="session[name]" type="text" class="form-control" placeholder="Gomer Pyle" autofocus>
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input id="password" name="session[password]" type="password" class="form-control" placeholder="Secrets!">
-			</div>
-			<button type="submit" class="btn btn-primary">Log in</button>
-		</form>
-	</main>
-	<footer class="visible-sm-block visible-md-block visible-lg-block">
-		<%= version %>
-	</footer>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">polyvox.fm</a>
+    </div>
+    <div class="navbar-text navbar-right happy">
+      Let your voice be heard!
+    </div>
+  </div>
+</nav>
+<main>
+  <%= form_tag(insider_trading_path(@conn, :create), class: "narrow") %>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="session[name]" type="text" class="form-control" placeholder="Gomer Pyle" autofocus>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" name="session[password]" type="password" class="form-control" placeholder="Secrets!">
+    </div>
+    <button type="submit" class="btn btn-primary">Log in</button>
+  </form>
+</main>

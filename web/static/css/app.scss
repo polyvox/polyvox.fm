@@ -18,7 +18,11 @@ $navbar-default-color: white;
 @import "bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:400);
 
-html, body {
+html {
+  min-height: 100%;
+}
+
+body {
   font-family: 'Roboto', sans-serif;
   min-height: 100%;
   background: radial-gradient(ellipse at 75% 75%,#FFECB3 20%,#FFFDE7 100%);
@@ -132,4 +136,31 @@ main {
 
 .happy {
   margin-right: 0.25em;
+}
+
+.insiders {
+  background: white;
+}
+
+.narrow {
+  max-width: 400px;
+  margin: auto;
+}
+
+.navbar-right {
+  .link {
+    float: left;
+  }
+}
+
+.alert {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .help-block {
+    display: inline;
+  }
 }

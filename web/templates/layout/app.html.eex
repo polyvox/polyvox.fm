@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<meta name="author" content="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-		<title>polyvox.fm</title>
-		<script>document.createElement('main');</script>
-		<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-	</head>
+    <title>polyvox.fm</title>
+    <script>document.createElement('main');</script>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
 
-	<body class="super-yellow">
-		<%= render @view_module, @view_template, assigns %>
-		<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-	</body>
+  <body>
+    <%= render @view_module, @view_template, assigns %>
+    <footer class="visible-sm-block visible-md-block visible-lg-block">
+      <%= version %>
+    </footer>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
 </html>
