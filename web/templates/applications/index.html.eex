@@ -5,7 +5,7 @@
       <span class="navbar-brand pull-right visible-xs-inline">We'll do the rest</span>
     </div>
     <%= if(@changeset && @changeset.errors[:email]) do %>
-      <div id="sign-up-error" class="navbar-right navbar-text">Looks like you've already signed up. Thanks!</div>
+      <div class="navbar-right navbar-text happy">Looks like you've already signed up. Thanks!</div>
     <% else %>
       <form class="navbar-form navbar-right" role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
 	<input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
@@ -18,7 +18,7 @@
     <% end %>
   </div>
 </nav>
-<main>
+<main class="tiled">
   <section class="two left">
     <header>
       <div class="img"></div>

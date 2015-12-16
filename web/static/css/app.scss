@@ -4,6 +4,12 @@
   }
 }
 
+@mixin on-sm {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
 $font-size-base: 16px;
 $text-color: #5D4037;
 $navbar-default-bg: #3E2723;
@@ -41,14 +47,20 @@ footer {
   h2 { font-size: floor(($font-size-base * 1.25)); }
 }
 
-main {  
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 1em 2em 0 2em;
+
   @include on-med {
-    max-width: 1000px;
-    margin: auto;
+    margin-top: 50px;
+  }
+}  
+  
+.tiled {  
+  @include on-med {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 1em;
-    margin-top: 50px;
   }
 }
 
@@ -115,5 +127,9 @@ main {
 
 .navbar-label {
   color: white;
+  font-weight: 400;
 }
 
+.happy {
+  margin-right: 0.25em;
+}
