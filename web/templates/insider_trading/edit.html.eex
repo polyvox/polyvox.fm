@@ -17,7 +17,7 @@
 				<div class="alert alert-danger">
 					<ul class="naked-list">
 						<%= for {attr, message} <- f.errors do %>
-							<li><%= humanize(attr) %> <%= message %></li>
+							<li><%= humanize(attr) %> <%= error_tag(f, attr) %></li>
 						<% end %>
 					</ul>
 				</div>

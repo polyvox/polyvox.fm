@@ -11,15 +11,11 @@ defmodule PolyvoxMarketing.Insider do
   end
 
   def password_changeset(model, params \\ :empty) do
-    changeset = model
+    model
     |> cast(params, ~w(password password_confirmation), [])
     |> validate_length(:password, min: 6, max: 100)
     |> validate_confirmation(:password, message: "passwords do not match")
     |> put_hashed_password
-
-    IO.inspect(changeset)
-
-    changeset
   end
 
   defp put_hashed_password(%Ecto.Changeset{valid?: true, changes: %{password: pass}} = changeset) do
