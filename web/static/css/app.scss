@@ -1,3 +1,10 @@
+@mixin on-med {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+$font-size-base: 16px;
 $text-color: #5D4037;
 $navbar-default-bg: #3E2723;
 $navbar-default-brand-color: white;
@@ -6,173 +13,107 @@ $navbar-default-color: white;
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:400);
 
 html, body {
-	font-family: 'Roboto', sans-serif;
-	min-height: 100%;
-
-	@media (min-width: 768px) {
-		height: 100%;
-	}
+  font-family: 'Roboto', sans-serif;
+  min-height: 100%;
+  background: radial-gradient(ellipse at 75% 75%,#FFECB3 20%,#FFFDE7 100%);
+  
+  @include on-med {
+    height: 100%;
+  }
 }
 
 input, button {
-	font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Roboto Condensed', sans-serif;
-	font-weight: 400;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+}
+
+footer {
+  margin-top: 1em;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
-	h1 { font-size: floor(($font-size-base * 1.7)); }
-	h2 { font-size: floor(($font-size-base * 1.25)); }
+  h1 { font-size: floor(($font-size-base * 1.7)); }
+  h2 { font-size: floor(($font-size-base * 1.25)); }
 }
 
-body {
-	padding-top: 0;
-
-	@media (min-width: 768px) {
-		display: flex;
-		padding-top: 70px;
-	}
-}
-
-main {
-	@media (min-width: 768px) {
-		display: flex;
-		flex: 1 0 auto;
-		overflow-y: auto;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-content: flex-start;
-		max-width: 1200px;
-                margin: auto;
-		-webkit-overflow-scrolling: touch;
-
-		&.vertical {
-			display: block;
-		}
-	}
-}
-
-#pseudo-body {
-	@media (min-width: 768px) {
-		flex: 1 0 auto;
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-                
-	}
-}
-
-#sign-up-error {
-	font-size: floor(($font-size-base * 1.25));
-	padding-right: 1em;
-}
-
-.super-yellow {
-	background: radial-gradient(ellipse at 75% 75%, #FFECB3 20%, #FFFDE7 100%);
-}
-
-.navbar-form {
-	border-bottom: 0;
-	margin-top: 0;
-	color: $navbar-default-color;
-
-	label {
-		padding-right: 0em;
-		font-weight: 400;
-		letter-spacing: .1em;
-	}
-
-	@media (min-width: 768px) {
-		margin-top: 8px;
-	}
-}
-
-.title-y {
-	text-transform: uppercase;
+main {  
+  @include on-med {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 1em;
+    margin-top: 50px;
+  }
 }
 
 .one, .two {
-	padding: 1em;
-
-	h2 {
-		margin-bottom: 0;
-	}
-
-	h1 {
-		margin-top: 0;
-	}
+  h1, h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
-.two {
-	flex: 2 0 68%;
+.one, .two {
+  flex: 1 0 50%;
 }
 
 .one {
-	flex: 1 0 34%;
+  header {
+    padding: 2rem 2rem 0 2rem;
+  }
+}
+
+.two {
+  header {
+    padding: 2rem 2rem 0 2rem;
+  }
+
+  @include on-med {
+    margin: auto 25%;
+  }
+}
+
+.one, .two {
+  header {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.left {
+  .img {
+    margin-right: 1em;
+  }
+}
+
+.right {
+  .img {
+    order: 2;
+  }
+
+  .headlines {
+    flex-grow: 1;
+    order: 1;
+  }
 }
 
 .content {
-	display: flex;
-	align-items: stretch;
-
-	&.left {
-		@media (min-width: 768px) {
-			.copy { padding-left: 1em; }
-		}
-	}
-
-	&.right {
-		@media (min-width: 768px) {
-			.img {
-				order: 2;
-			}
-
-			.copy {
-				padding-left: 0;
-				order: 1;
-				padding-right: 1em;
-			}
-		}
-	}
+  padding: 1rem 2rem 2rem 2rem;
 }
 
 .img {
-	flex: 1 0 100px;
-	background-color: $gray-lighter;
-	display: none;
-
-	@media (min-width: 768px) {
-		display: block;
-	}
+  background-color: gray;
+  min-width: 100px;
+  min-height: 100px;
 }
 
-.copy {
-	flex: 3 1 auto;
+.navbar-label {
+  color: white;
 }
 
-.middle-of-the-road {
-	flex: 1 0 768px;
-	max-width: 768px;
-}
-
-.bigger {	 
-	text-transform: uppercase;
-}
-
-.padded-when-small {
-	padding-left: 1em;
-	padding-right: 1em;
-}
-
-.navbar-header .link {
-  display: inline-block;
-  float: left;
-}
-
-.naked-list {
-  list-style: none;
-  padding-left: 0;
-}
