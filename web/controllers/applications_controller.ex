@@ -12,10 +12,15 @@ defmodule PolyvoxMarketing.ApplicationsController do
     model = PolyvoxMarketing.Applicant
     |> Ecto.Query.where([a], a.said == ^id)
     |> Repo.one
-    |> PolyvoxMarketing.Applicant.changeset(:empty)
 
-    conn
-    |> render(:show, applicant: model)
+    case model do
+      nil ->
+        conn
+        |> redirect(to: "/")
+      _ ->
+        conn
+        |> render(:show, applicant: PolyvoxMarketing.Applicant.changeset(model, :empty))
+    end
   end
 
   def create(conn, %{"application" => application}) do

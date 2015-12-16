@@ -6,6 +6,7 @@ defmodule PolyvoxMarketing.InsiderTradingController do
 
   def new(conn, _) do
     conn
+    |> put_layout("insiders.html")
     |> render(:new)
   end
 

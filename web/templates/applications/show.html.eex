@@ -1,95 +1,90 @@
-<div id="pseudo-body">
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="/" class="navbar-brand">polyvox.fm</a>
-			</div>
-			<div id="sign-up-error" class="navbar-text navbar-right">
-				Let your voice be heard!
-			</div>
-		</div>
-	</nav>
-	<main class="vertical middle-of-the-road padded-when-small">
-		<section>
-			<h1>Hey, nice to know you!</h1>
-			<p>
-				At this point, we're working really hard to get something
-				up and running for everyone to use. As we continue to add
-				functionality, we'll make sure to alert you of those
-				changes.
-			</p>
-		</section>
-		<%= if (@applicant.model.name) do %>
-			<section>
-				<h2>Thanks, even more!</h2>
-				<p>
-					As we continue to make polyvox.fm better and better, we'll
-					start send out an invitation to you so you can get on-board
-					and help shape the future of polyvox.fm.
-				</p>
-			</section>
-		<% else %>
-			<section>
-				<h2>Already got a podcast? Want to shape the future?</h2>
-				<p>
-					If you would like to try out our invitation-only alpha program,
-					please fill out the form below and we'll send out an invitation
-					to you as we approach the launch of the polyvox.fm platform.
-				</p>
-				<%= form_for @applicant, applications_path(@conn, :update, @applicant.model.said), [id: "application-form", as: :application], fn f ->%>
-					<div class="form-group">
-						<%= label(f, :name, "Your name") %>
-						<%= text_input(f, :name, class: "form-control", placeholder: "Margot Slezak", required: true, autofocus: true) %>
-					</div>
-					<div class="form-group">
-						<%= label(f, :podcast_name, "Your podcast's name") %>
-						<%= text_input(f, :podcast_name, class: "form-control", placeholder: "Virtual Alignment", required: true) %>
-					</div>
-					<div class="form-group">
-						<%= label(f, :podcast_url, "Your podcast's URL") %>
-						<%= text_input(f, :podcast_url, class: "form-control", placeholder: "www.virtual-alignment.info", required: true) %>
-					</div>
-					<p>What feature below do you find most interesting?</p>
-					<div class="radio">
-						<label>
-							<%= radio_button(f, :priority, "collaboration", checked: true, required: true) %>
-							Collaboration by working with other co-hosts and guests
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<%= radio_button(f, :priority, "analytics", required: true) %>
-							A good set of tools to review how many people listen to my podcast
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<%= radio_button(f, :priority, "sponsorship", required: true) %>
-							A place where I can approach sponsors and they can approach me
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<%= radio_button(f, :priority, "cloud-recording", required: true) %>
-							Individual audio files for each podcast participant
-						</label>
-					</div>
-					<div class="radio form-inline">
-						<label>
-							<%= radio_button(f, :priority, "other", required: true) %>
-							Other
-						</label>
-						&nbsp;
-						<%= text_input(f, :priority, class: "form-control", disabled: true, required: true) %>
-					</div>
-					<div class="text-right">
-						<button class="btn btn-primary">I want to participate!</button>
-					</div>
-				<% end %>
-			</section>
-		<% end %>
-	</main>
-	<footer class="visible-sm-block visible-md-block visible-lg-block">
-		<%= version %>
-	</footer>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">polyvox.fm</a>
+    </div>
+    <div class="navbar-text navbar-right happy">
+      Let your voice be heard!
+    </div>
+  </div>
+</nav>
+<main class="vertical middle-of-the-road padded-when-small">
+  <section>
+    <h1>Hey, nice to know you!</h1>
+    <p>
+      At this point, we're working really hard to get something
+      up and running for everyone to use. As we continue to add
+      functionality, we'll make sure to alert you of those
+      changes.
+    </p>
+  </section>
+  <%= if (@applicant.model.name) do %>
+    <section>
+      <h1>Thanks, even more!</h1>
+      <p>
+	As we continue to make polyvox.fm better and better, we'll
+	start send out an invitation to you so you can get on-board
+	and help shape the future of polyvox.fm.
+      </p>
+    </section>
+  <% else %>
+    <section>
+      <h2>Already got a podcast? Want to shape the future?</h2>
+      <p>
+	If you would like to try out our invitation-only alpha program,
+	please fill out the form below and we'll send out an invitation
+	to you as we approach the launch of the polyvox.fm platform.
+      </p>
+      <%= form_for @applicant, applications_path(@conn, :update, @applicant.model.said), [id: "application-form", as: :application], fn f ->%>
+	<div class="form-group">
+	  <%= label(f, :name, "Your name") %>
+	  <%= text_input(f, :name, class: "form-control", placeholder: "Margot Slezak", required: true, autofocus: true) %>
+	</div>
+	<div class="form-group">
+	  <%= label(f, :podcast_name, "Your podcast's name") %>
+	  <%= text_input(f, :podcast_name, class: "form-control", placeholder: "Virtual Alignment", required: true) %>
+	</div>
+	<div class="form-group">
+	  <%= label(f, :podcast_url, "Your podcast's URL") %>
+	  <%= text_input(f, :podcast_url, class: "form-control", placeholder: "www.virtual-alignment.info", required: true) %>
+	</div>
+	<p>What feature below do you find most interesting?</p>
+	<div class="radio">
+	  <label>
+	    <%= radio_button(f, :priority, "collaboration", checked: true, required: true) %>
+	    Collaboration by working with other co-hosts and guests
+	  </label>
+	</div>
+	<div class="radio">
+	  <label>
+	    <%= radio_button(f, :priority, "analytics", required: true) %>
+	    A good set of tools to review how many people listen to my podcast
+	  </label>
+	</div>
+	<div class="radio">
+	  <label>
+	    <%= radio_button(f, :priority, "sponsorship", required: true) %>
+	    A place where I can approach sponsors and they can approach me
+	  </label>
+	</div>
+	<div class="radio">
+	  <label>
+	    <%= radio_button(f, :priority, "cloud-recording", required: true) %>
+	    Individual audio files for each podcast participant
+	  </label>
+	</div>
+	<div class="radio form-inline">
+	  <label>
+	    <%= radio_button(f, :priority, "other", required: true) %>
+	    Other
+	  </label>
+	  &nbsp;
+	  <%= text_input(f, :priority, class: "form-control", disabled: true, required: true) %>
+	</div>
+	<div class="text-right">
+	  <button class="btn btn-primary">I want to participate!</button>
+	</div>
+      <% end %>
+    </section>
+  <% end %>
+</main>
