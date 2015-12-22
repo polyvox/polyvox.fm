@@ -60,3 +60,10 @@ So, if you're deploying version 0.5.1, you'd type
 
 This will stop the remote service, upload the tarball, expand it correctly,
 and put start the service. This will migrate the database, too! *Voila!*
+
+### Notes
+
+Hero images sourced from:
+  https://www.pexels.com/photo/sound-speaker-radio-microphone-484/
+  https://www.pexels.com/photo/apple-laptop-macbook-pro-notebook-1784/
+  https://www.pexels.com/photo/technology-music-sound-things-1591/
