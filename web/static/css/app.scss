@@ -1,19 +1,45 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:300,400);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed:300,400,700|Righteous|Material+Icons);
+
+@mixin md-ratio {
+  @media (max-aspect-ratio: 13/10) and (min-aspect-ratio: 4/5) {
+    @content
+  }
+}
+
+@mixin sm-ratio {
+  @media (max-aspect-ratio: 4/5) {
+    @content
+  }
+}
+
+$purple: #0d47a1;
+$blue: #2196f3;
+$orange: #ff6d00;
+$text-color: #3E2723;
 
 html {
   font-family: "Roboto";
   font-size: 16px;
   line-height: 1.2;
+  color: $text-color;
+
+  @media (min-width: 640px) {
+    font-size: 24px;
+  }
 }
 
 body {
+  padding: 0;
+  margin: 0;
   height: 100%;
   background-color: white;
 }
 
 main {
-  max-width: 2560px;
-  margin: auto;
+  @media (min-width: 768px) {
+    width: 50vw;
+    margin-left: 5vw;
+  }
 }
 
 footer {
@@ -21,14 +47,23 @@ footer {
   font-size: 0.7em;
 }
 
+form {
+  width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto Condensed";
   font-weight: 300;
 }
 
+input, textarea, select, button {
+  font-family: "Roboto";
+  font-size: 1rem;
+}
+
 .hero {
   opacity: 0.3;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -36,14 +71,158 @@ h1, h2, h3, h4, h5, h6 {
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
-  z-index: -1;
+  z-index: -2;
+
+  @include md-ratio {
+    background-position: center;
+  }
+
+  @include sm-ratio {
+    background-position: 60%;
+  }
 }
 
 .hero-1 {
-  background-image: url(/hero-microphone.jpg);
+  .hero {
+    background-image: url(/hero-microphone.jpg);
+  }
 }
 
 .icon {
   width: 200px;
   margin: auto;
+
+  @media (max-width: 320px) {
+    height: 150px;
+  }
 }
+
+.logo-text {
+  font-family: 'Righteous';
+  font-size: 3rem;
+  margin: 0;
+}
+
+.tight-down {
+  margin-bottom: 0;
+}
+
+.tight-up {
+  margin-top: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.exclaim {
+  text-transform: uppercase;
+}
+
+.exclaim:after {
+  content: "!";
+}
+  
+.heavy {
+  font-weight: 700;
+}
+
+.purple-theme {
+  box-sizing: border-box;
+  padding: 1rem;
+  position: relative;
+  color: white;
+  min-width: 570px;
+
+  .control {
+    border-color: white;
+  }
+
+  @media (max-width: 768px) {
+    min-width: auto;
+  }
+}
+
+.purple-theme:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: $purple;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: .75;
+}
+
+.label {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.control {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .5em 1em;
+  border: 1px solid;
+  margin-bottom: 1em;
+}
+
+.cta {
+  color: white;
+  border: 2px solid white;
+  background-color: $orange;
+  padding: .5em 1em;
+}
+
+.content-section {
+  background-color: white;
+  position: relative;
+  min-width: 570px;
+
+  @media (max-width: 768px) {
+    min-width: auto;
+    margin-bottom: 2em;
+    border-top: 2px solid $text-color;
+    border-bottom: 2px solid $text-color;
+  }
+}
+
+.watermark {
+  color: $blue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  opacity: .1;
+
+  .material-icons {
+    font-size: 12rem;
+  }
+}
+
+.content-section-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.copy {
+  padding-bottom: 1rem;
+  margin: 1rem 1rem 0 1rem;
+}
+
+.inverse-theme {
+  background-color: $text-color;
+  color: white;
+
+  .watermark {
+    color: $orange;
+    opacity: .2;
+  }
+}
+
