@@ -36,9 +36,10 @@ body {
 }
 
 main {
+  display: block;
+
   @media (min-width: 768px) {
-    width: 50vw;
-    margin-left: 5vw;
+    width: 60vw;
   }
 }
 
@@ -61,6 +62,43 @@ input, textarea, select, button {
   font-size: 1rem;
 }
 
+#logo-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#collaborate {
+  .content-section-header {
+    background-image: url(/hero-people.jpg);
+    color: white;
+    background-position: top;
+  }
+}
+
+#earn {
+  .content-section-header {
+    background-image: url(/hero-money.jpg);
+    color: white;
+    background-position: center;
+  }
+}
+
+#record {
+  .content-section-header {
+    background-image: url(/hero-recording.jpg);
+    color: white;
+  }
+}
+
+#analyze {
+  .content-section-header {
+    background-image: url(/hero-headphones.jpg);
+    color: white;
+  }
+}
+
 .hero {
   opacity: 0.3;
   position: fixed;
@@ -69,7 +107,7 @@ input, textarea, select, button {
   right: 0;
   bottom: 0;
   background-size: cover;
-  background-position: right;
+  background-position: top right;
   background-repeat: no-repeat;
   z-index: -2;
 
@@ -90,7 +128,6 @@ input, textarea, select, button {
 
 .icon {
   width: 200px;
-  margin: auto;
 
   @media (max-width: 320px) {
     height: 150px;
@@ -122,9 +159,41 @@ input, textarea, select, button {
 .exclaim:after {
   content: "!";
 }
-  
+
 .heavy {
   font-weight: 700;
+}
+
+.orange-theme {
+  box-sizing: border-box;
+  padding: 1rem;
+  position: relative;
+  color: black;
+}
+
+.orange-theme:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: orange;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: .75;
+}
+
+.secondary-cta {
+  color: white;
+  border: 2px solid white;
+  background-color: transparent;
+  padding: 0.5em 1em;
+}
+
+.secondary-cta:active {
+  color: darken(#FFFFFF, 10%);
+  background-color: rgba(0, 0, 0, .1);
+  border-color: darken(#FFFFFF, 10%);
 }
 
 .purple-theme {
@@ -132,14 +201,9 @@ input, textarea, select, button {
   padding: 1rem;
   position: relative;
   color: white;
-  min-width: 570px;
 
   .control {
     border-color: white;
-  }
-
-  @media (max-width: 768px) {
-    min-width: auto;
   }
 }
 
@@ -175,17 +239,18 @@ input, textarea, select, button {
   padding: .5em 1em;
 }
 
+.cta:active {
+  background-color: darken($orange, 10%);
+  border-color: darken(#FFFFFF, 10%);
+  color: darken(#FFFFFF, 10%);
+}
+
 .content-section {
   background-color: white;
   position: relative;
-  min-width: 570px;
-
-  @media (max-width: 768px) {
-    min-width: auto;
-    margin-bottom: 2em;
-    border-top: 2px solid $text-color;
-    border-bottom: 2px solid $text-color;
-  }
+  border-bottom: 1px solid #EEE;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .watermark {
@@ -196,9 +261,10 @@ input, textarea, select, button {
   left: 0;
   right: 0;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: flex-end;
-  opacity: .1;
+  opacity: .2;
+  display: none;
 
   .material-icons {
     font-size: 12rem;
@@ -208,17 +274,26 @@ input, textarea, select, button {
 .content-section-header {
   display: flex;
   align-items: center;
-  padding: 1rem 1rem 0 1rem;
+  padding: 1rem 1rem .5rem 1rem;
+  height: 30vw;
+  background-position: bottom;
+  background-size: cover;
+  font-size: 2em;
+  align-items: flex-end;
+  text-shadow: 2px 2px 2px black;
 }
 
 .copy {
   padding-bottom: 1rem;
-  margin: 1rem 1rem 0 1rem;
+  margin: 1rem auto 1rem auto;
+  padding: 0 2rem 0 2rem;
+  text-align: justify;
+  max-width: 640px;
 }
 
 .inverse-theme {
-  background-color: $text-color;
-  color: white;
+  /* background-color: $text-color;  */
+  /* color: white; */
 
   .watermark {
     color: $orange;
@@ -226,3 +301,6 @@ input, textarea, select, button {
   }
 }
 
+.shadowed {
+  box-shadow: 0 2px 6px 2px #BDBDBD;
+}

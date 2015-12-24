@@ -1,8 +1,8 @@
 <div class="hero-1">
   <div class="hero"></div>
 </div>
-<main>
-  <header class="text-center">
+<main class="shadowed">
+  <header class="content-section text-center" id="logo-holder">
     <div class="icon">
       <svg width="100%" height="100%" viewBox="0 0 193 193" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
         <path d="M49.694,42.752c8.017,-4.683 17.323,-7.365 27.245,-7.365c30.079,0 54.5,24.645 54.5,55c0,30.356 -24.421,55 -54.5,55c-2.544,0 -5.048,-0.176 -7.5,-0.517l0,15.517c0,6.623 -5.377,12 -12,12l-25,0c-6.623,0 -12,-5.377 -12,-12l0,-110c0,-6.623 5.377,-12 12,-12l8,0c3.724,0 7.054,1.7 9.255,4.365Z" style="fill:#fff;"/>
@@ -15,17 +15,21 @@
     <h2 class="tight-down tight-up exclaim">let your voice be heard</h2>
     <h3 class="tight-up heavy">we'll do the rest</h3>
   </header>
-  <section class="purple-theme text-center">
+  <section class="purple-theme text-center" id="sign-up">
     <%= if(@changeset && @changeset.errors[:email]) do %>
-      Looks like you've already signed up. Thanks!
+    Looks like you've already signed up. Thanks!
     <% else %>
-      <form role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
-	<input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
-        <label class="label" for="signup-email">I'm interested in learning more about polyvox.fm!</label>
-	<input name="application[email]" id="signup-email" type="email" class="control text-center" placeholder="here&apos;s my email" required>
-	<button type="submit" class="cta">keep me informed</button>
-      </form>
+    <form role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
+      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
+      <label class="label" for="signup-email">I'm interested in learning more about polyvox.fm!</label>
+      <input name="application[email]" id="signup-email" type="email" class="control text-center" placeholder="here&apos;s my email" required>
+      <button type="submit" class="cta">keep me informed</button>
+    </form>
     <% end %>
+  </section>
+  <section class="orange-theme text-center" id="story">
+    <h1 class="exclaim">for podcasters by podcasters</h1>
+    <button id="listen" class="secondary-cta">Listen to our story</button>
   </section>
   <section id="collaborate" class="content-section">
     <div class="watermark">
@@ -45,13 +49,14 @@
       Whatever you decide, you can easily grow your conversation with
       the world.
     </div>
-  </section><section id="collaborate" class="content-section inverse-theme">
+  </section>
+  <section id="analyze" class="content-section inverse-theme">
     <div class="watermark">
       <i class="material-icons">insert_chart</i>
     </div>
     <header>
       <h1 class="content-section-header tight-down tight-up">
-        <span class="heavy">Analyze listenership</span>
+        <span class="heavy">Analyze your listenership</span>
       </h1>
     </header>
     <div class="copy">
@@ -64,13 +69,13 @@
       audience, after all.
     </div>
   </section>
-  <section id="collaborate" class="content-section">
+  <section id="earn" class="content-section">
     <div class="watermark">
       <i class="material-icons">attach_money</i>
     </div>
     <header>
       <h1 class="content-section-header tight-down tight-up">
-        <span class="heavy">Find sponsors</span>
+        <span class="heavy">Find great sponsors</span>
       </h1>
     </header>
     <div class="copy">
@@ -83,7 +88,7 @@
       recording session.
     </div>
   </section>
-  <section id="collaborate" class="content-section inverse-theme">
+  <section id="record" class="content-section inverse-theme">
     <div class="watermark">
       <i class="material-icons">headset_mic</i>
     </div>
@@ -103,15 +108,14 @@
   </section>
   <section class="purple-theme text-center">
     <%= if(@changeset && @changeset.errors[:email]) do %>
-      Looks like you've already signed up. Thanks!
+    Looks like you've already signed up. Thanks!
     <% else %>
-      <form role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
-	<input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
-        <label class="label" for="signup-email">I'm interested in learning more about polyvox.fm!</label>
-	<input name="application[email]" id="signup-email" type="email" class="control text-center" placeholder="here&apos;s my email" required>
-	<button type="submit" class="cta">keep me informed</button>
-      </form>
+    <form role="signup" method="post" action="<%= applications_path(@conn, :create) %>">
+      <input type="hidden" name="_csrf_token" value="<%= get_csrf_token %>">
+      <label class="label" for="signup-email">I'm interested in learning more about polyvox.fm!</label>
+      <input name="application[email]" id="signup-email" type="email" class="control text-center" placeholder="here&apos;s my email" required>
+      <button type="submit" class="cta">keep me informed</button>
+    </form>
     <% end %>
   </section>
 </main>
-

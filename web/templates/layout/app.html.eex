@@ -8,7 +8,6 @@
     <meta name="author" content="">
 
     <title>polyvox.fm</title>
-    <script>document.createElement('main');</script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
