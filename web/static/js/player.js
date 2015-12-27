@@ -170,6 +170,9 @@ export class MarketingPlayer {
     }
 
     _monitorVolume() {
+        if (this._stopMonitoring) {
+            return;
+        }
         let ppv = this._previousVolume;
         let pv = this._volume;
         let volume = 0;
@@ -191,6 +194,9 @@ export class MarketingPlayer {
     }
 
     _fire(name, e) {
+        if (name === 'ended') {
+            this._stopMonitoring = true;
+        }
         var listeners = this._eventListeners[name];
         for (var listener of listeners) {
             listener(e);

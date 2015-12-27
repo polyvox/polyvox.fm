@@ -16,7 +16,7 @@
     <footer class="visible-sm-block visible-md-block visible-lg-block">
       Third Coast! Houston, TX! Loves podcasting! (version <%= version %>)
     </footer>
-    <script src="https://cdn.jsdelivr.net/es6-promise/3.0.2/es6-promise.min.js"></script>
+    <script>global = window</script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

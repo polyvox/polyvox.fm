@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import 'deps/phoenix_html/web/static/js/phoenix_html';
 import { RippleSurface } from './ripple';
 import { MarketingPlayer as Player } from './player';

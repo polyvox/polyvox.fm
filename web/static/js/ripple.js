@@ -15,6 +15,12 @@ export class RippleSurface {
             width: center.clientWidth,
             height: center.clientHeight
         };
+
+        window.addEventListener('resize', () => {
+            s.setAttribute('height', container.offsetHeight);
+            this._centered.x = center.offsetLeft + center.clientWidth / 2;
+            this._centered.y = center.offsetTop + center.clientHeight / 2;
+        });
     }
 
     ripple() {
