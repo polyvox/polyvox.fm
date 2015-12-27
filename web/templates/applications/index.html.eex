@@ -125,3 +125,4 @@
     <% end %>
   </section>
 </main>
+<audio id="blank" src="/images/blank.mp3"></audio>

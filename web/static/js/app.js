@@ -3,13 +3,16 @@ import 'deps/phoenix_html/web/static/js/phoenix_html';
 import { RippleSurface } from './ripple';
 import { MarketingPlayer as Player } from './player';
 
+var blank = document.getElementById('blank');
 var listen = document.getElementById('listen');
 var play = document.getElementById('play');
-listen.addEventListener('click', function _listenClick() {
-    listen.removeEventListener('click', _listenClick);
+listen.addEventListener('mousedown', function _listenClick() {
+    var player = new Player();
+    player.init();
+    blank.play();
     moveListenButton()
         .then(movePlayButton)
-        .then(spinUntilInitialized)
+        .then(() => spinUntilInitialized(player))
         .then(setUpPlayerControls)
         .catch(e => console.log(e));
 });
@@ -37,17 +40,14 @@ function movePlayButton() {
     });
 }
 
-function spinUntilInitialized() {
+function spinUntilInitialized(player) {
     return new Promise(good => {
         var story = document.getElementById('story');
-        var player = new Player();
         var surface = new RippleSurface(story, 500, '100%', play);
         var ready = false;
-
         player.addEventListener('ready', e => {
             ready = true;
         });
-        player.init();
 
         play.classList.add('spin');
         play.addEventListener('animationiteration', function _iterationend() {

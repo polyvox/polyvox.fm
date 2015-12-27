@@ -67,8 +67,8 @@ class Ripple {
         n.setAttribute('opacity', opac);
         n.setAttribute('x', x - w / 2 + 1);
         n.setAttribute('y', y - h / 2 + 1);
-        n.setAttribute('width', w - 2);
-        n.setAttribute('height', h - 2);
+        n.setAttribute('width', w - 1);
+        n.setAttribute('height', h - 1);
         n.setAttribute('rx', r);
         n.setAttribute('ry', r);
 

@@ -1,9 +1,21 @@
 var Analyzer = function () {};
 
 if (!window.AudioContext && window.webkitAudioContext) {
+    var globalAudioContext = new window.webkitAudioContext();
     class WebkitAnalyzer {
         constructor(url, done, ended) {
-            this._context = new window.webkitAudioContext();
+            let sampleRate = globalAudioContext.sampleRate;
+            this._context = globalAudioContext;
+
+            var source = this._context.createBufferSource();
+            var analyzer = this._context.createAnalyser();
+            analyzer.fftSize = 2048;
+
+            source.buffer = this._context.createBuffer(2, sampleRate, sampleRate * 2.0);
+            source.connect(analyzer);
+            analyzer.connect(this._context.destination);
+            source.start(0);
+
             this._done = done;
             this._startTime = 0;
             this._ended = ended;
@@ -167,6 +179,10 @@ export class MarketingPlayer {
     addEventListener(name, fn) {
         this._eventListeners[name] = this._eventListeners[name] || [];
         this._eventListeners[name].push(fn);
+
+        if (this['_' + name]) {
+            this._fire(name);
+        }
     }
 
     _monitorVolume() {
@@ -197,7 +213,10 @@ export class MarketingPlayer {
         if (name === 'ended') {
             this._stopMonitoring = true;
         }
-        var listeners = this._eventListeners[name];
+        if (name === 'ready') {
+            this._ready = true;
+        }
+        var listeners = this._eventListeners[name] || [];
         for (var listener of listeners) {
             listener(e);
         }
