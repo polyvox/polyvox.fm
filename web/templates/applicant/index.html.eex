@@ -1,0 +1,44 @@
+<div id="pseudo-body">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<div class="navbar-brand title-y">Insiders!</div>
+			</div>
+			<div class="navbar-header navbar-right">
+				<%= link("Change Password", to: insider_trading_path(@conn, :edit, 0), class: "navbar-text link") %>
+				<%= link("Logout", to: insider_trading_path(@conn, :delete, 0), method: :delete, class: "navbar-text") %>
+			</div>
+		</div>
+	</nav>
+
+	<main style="align-self: stretch;">
+		<h2>Listing applicants</h2>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Priority</th>
+					<th>Podcast</th>
+					<th>Signed up on</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= for applicant <- @applicants do %>
+					<tr>
+						<td><%= applicant.email %></td>
+						<td><%= applicant.name %></td>
+						<td><%= applicant.priority %></td>
+						<td><%= smart_link(applicant.podcast_name, to: applicant.podcast_url) %></td>
+						<td><%= applicant.updated_at %></td>
+						<td class="text-right">
+							<%= link "Delete", to: applicant_path(@conn, :delete, applicant), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</main>
+</div>
