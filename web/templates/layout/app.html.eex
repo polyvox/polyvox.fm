@@ -8,15 +8,15 @@
     <meta name="author" content="">
 
     <title>polyvox.fm</title>
-    <script>document.createElement('main');</script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <%= render @view_module, @view_template, assigns %>
     <footer class="visible-sm-block visible-md-block visible-lg-block">
-      <%= version %>
+      Third Coast! Houston, TX! Loves podcasting! (version <%= version %>)
     </footer>
+    <script>global = window</script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

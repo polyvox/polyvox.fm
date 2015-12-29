@@ -3,7 +3,7 @@ defmodule PolyvoxMarketing.Mixfile do
 
   def project do
     [app: :polyvox_marketing,
-     version: "0.1.1",
+     version: "0.2.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -19,7 +19,7 @@ defmodule PolyvoxMarketing.Mixfile do
   def application do
     [mod: {PolyvoxMarketing, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :connection, :postgrex, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -36,7 +36,8 @@ defmodule PolyvoxMarketing.Mixfile do
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:exrm, "~> 1.0.0-rc7"},
+     {:exrm, "~> 0.19"},
+     {:connection, "~> 1.0"},
      {:gettext, "~> 0.9"},
      {:comeonin, "~> 1.6.0"}]
   end
