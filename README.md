@@ -16,10 +16,6 @@ So, to get that, here's a little thing for you to run.
 # Check out http://caskroom.io
 brew cask install virtualbox
 brew cask install vagrant
-
-# Install the vagrant-scp plugin
-# We will eventually remove this as a dependency
-vagrant plugin install vagrant-scp
 ```
 
 ## SECRETS!
