@@ -1,10 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a href="/" class="navbar-brand">polyvox.fm</a>
-    </div>
-    <div class="navbar-text navbar-right happy">
-      Let your voice be heard!
+      <a href="/" class="navbar-brand">polyvox insiders</a>
     </div>
   </div>
 </nav>
