@@ -39,7 +39,8 @@ gulp.task('build:js', function () {
   ];
   var p = {
     presets: ['es2015'],
-    plugins: ['transform-es2015-modules-umd']
+    plugins: ['transform-es2015-modules-umd'],
+    ignore: ['*/babel-polyfill/browser.js']
   };
   return gulp.src(sources)
     .pipe($if(!isProd, sourcemaps.init()))
@@ -55,4 +56,4 @@ gulp.task('watch', ['build'], function () {
   gulp.watch('web/static/js/**/*', ['build:js']);
 });
 
-gulp.task('build', ['build:css', 'build:js', 'build:assets']);
+gulp.task('build', ['build:css', 'build:assets', 'build:js']);

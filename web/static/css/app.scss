@@ -481,12 +481,16 @@ footer {
     width: auto;
   }
 
+  .navbar-text {
+    float: none;
+  }
+
   .narrow {
     max-width: 480px;
     margin: auto;
   }
 
   .link {
-    display: inline;
+    display: inline-block;
   }
 }
