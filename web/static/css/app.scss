@@ -231,7 +231,8 @@ input, textarea, select, button {
   box-sizing: border-box;
   width: 100%;
   padding: .5em 1em;
-  border: 1px solid;
+  border-width: 1px;
+  border-style: solid;
   margin-bottom: 1em;
 }
 
@@ -461,4 +462,31 @@ footer {
 .spin {
   transform-origin: center center;
   animation: spin1 1s infinite;
+}
+
+.insiders {
+  font-family: "Roboto";
+  font-size: 16px;
+  line-height: 1.2;
+  color: $text-color;
+
+  main {
+    margin-top: 87px;
+    width: auto;
+  }
+
+  footer {
+    background-color: transparent;
+    color: $text-color;
+    width: auto;
+  }
+
+  .narrow {
+    max-width: 480px;
+    margin: auto;
+  }
+
+  .link {
+    display: inline;
+  }
 }

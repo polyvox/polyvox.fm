@@ -113,3 +113,15 @@ function setUpPlayerControls([player, surface]) {
         start();
     });
 }
+
+var linkForms = Array.from(document.querySelectorAll('[data-submit=parent]'));
+for (var linkForm of linkForms) {
+  linkForm.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!this.getAttribute('data-confirm') || confirm(this.getAttribute('data-confirm'))) {
+      if (this.parentNode && this.parentNode.submit) {
+        this.parentNode.submit();
+      }
+    }
+  });
+}
