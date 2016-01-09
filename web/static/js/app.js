@@ -1,21 +1,40 @@
 import 'babel-polyfill';
-import 'deps/phoenix_html/web/static/js/phoenix_html';
 import { RippleSurface } from './ripple';
 import { MarketingPlayer as Player } from './player';
 
 var blank = document.getElementById('blank');
 var listen = document.getElementById('listen');
 var play = document.getElementById('play');
-listen.addEventListener('mousedown', function _listenClick() {
+var radios = Array.from(document.querySelectorAll('input[type=radio]'));
+var other_cb = document.getElementById('application_priority_other');
+var other_tb = document.getElementById('application_priority');
+if (play) {
+  listen.addEventListener('mousedown', function _listenClick() {
     var player = new Player();
     player.init();
     blank.play();
     moveListenButton()
-        .then(movePlayButton)
-        .then(() => spinUntilInitialized(player))
-        .then(setUpPlayerControls)
-        .catch(e => console.log(e));
-});
+      .then(movePlayButton)
+      .then(() => spinUntilInitialized(player))
+      .then(setUpPlayerControls)
+      .catch(e => console.log(e));
+  });
+}
+
+if (other_cb) {
+  for (var radio of radios) {
+    radio.addEventListener('click', function _listenClick2() {
+      setTimeout(() => {
+        other_tb.disabled = !other_cb.checked;
+        if (other_tb.disabled) {
+          other_tb.value = '';
+        } else {
+          other_tb.focus();
+        }
+      }, 0);
+    });
+  }
+}
 
 function once(el, name, fn) {
     el.addEventListener(name, function _bindy() {

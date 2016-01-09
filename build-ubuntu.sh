@@ -12,7 +12,7 @@ move-it-all () {
 		vagrant ssh -c "mv /vagrant/archive.zip /home/vagrant/"
 		vagrant ssh -c "unzip /home/vagrant/archive.zip -d /home/vagrant/polyvox"
 		vagrant ssh -c "rm -f /home/vagrant/archive.zip /home/vagrant/polyvox/Vagrantfile /home/vagrant/polyvox/build-ubuntu.sh"
-		vagrant ssh -c "pushd ~/polyvox && npm install && mix deps.get && mix compile && mix ecto.reset && brunch build --production"
+		vagrant ssh -c "pushd ~/polyvox && npm install && mix deps.get && mix compile && mix ecto.reset && gulp build --production"
 		vagrant ssh -c "pushd ~/polyvox && mix phoenix.digest"
 		vagrant ssh -c "pushd ~/polyvox && mix release"
 		VERSION=$(vagrant ssh -c "ls ~/polyvox/rel/polyvox_marketing/releases | head -1" | tr -d '\n\r')

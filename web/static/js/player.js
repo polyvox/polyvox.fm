@@ -164,7 +164,7 @@ export class MarketingPlayer {
     init() {
         let ready = this._fire.bind(this, 'ready');
         let ended = this._fire.bind(this, 'ended');
-        this._analyzer = new Analyzer('./images/intro.mp3', ready, ended);
+        this._analyzer = new Analyzer('./audio/intro.mp3', ready, ended);
     }
 
     play() {
