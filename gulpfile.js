@@ -31,11 +31,17 @@ gulp.task('build:css', function () {
 });
 
 gulp.task('build:js', function () {
+  var sources = [
+    'node_modules/babel-polyfill/browser.js',
+    'web/static/js/ripple.js',
+    'web/static/js/player.js',
+    'web/static/js/app.js'
+  ];
   var p = {
     presets: ['es2015'],
     plugins: ['transform-es2015-modules-umd']
   };
-  return gulp.src('web/static/js/*')
+  return gulp.src(sources)
     .pipe($if(!isProd, sourcemaps.init()))
       .pipe(babel(p))
       .pipe(concat('app.js'))
