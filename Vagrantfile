@@ -78,7 +78,7 @@ Vagrant.configure(2) do |config|
 		sudo sed -i 's/root \\/usr\\/share\\/nginx\\/html;/root \\/home\\/vagrant\\/polyvox\\/rel\\/polyvox\\/lib\\/polyvox-0.0.1\\/priv\\/static\\/;/' /etc/nginx/sites-available/default
 		sudo sed -i 's/try_files $uri $uri\\/ =404;/proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Host $http_host; proxy_pass_header X-Accel-Redirect; proxy_read_timeout 300s; if (!-f $request_filename) { proxy_pass http:\\/\\/127.0.0.1:4001; break; }/' /etc/nginx/sites-available/default
 		sudo nginx -s reload
-		sudo npm install -g brunch
+		sudo npm install -g gulp
 		mix local.rebar
 		echo "export MIX_ENV=prod" >> ~/.bash_profile
 		echo "export PORT=4001" >> ~/.bash_profile
@@ -88,4 +88,3 @@ Vagrant.configure(2) do |config|
 		sudo -u postgres psql postgres -c "alter user polyvox_beta_prod with encrypted password 'md5b22abc21810b75ae5605966301c17755';"
 	SHELL
 end
-
