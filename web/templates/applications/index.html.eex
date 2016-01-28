@@ -32,13 +32,6 @@
       </form>
       <% end %>
     </section>
-    <section class="orange-theme text-center" id="story">
-      <h1 class="exclaim">for podcasters by podcasters</h1>
-      <button id="listen" class="secondary-cta disappears-left">Listen to our story</button>
-      <button id="play" class="appears-left">
-        <i class="material-icons larger-icon">hourglass_full</i>
-      </button>
-    </section>
   </div>
   <section id="collaborate" class="content-section">
     <div class="watermark">
